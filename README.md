@@ -1,66 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Green IT Blog
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descrição do projeto 
 
-## About Laravel
+Este repositório contém o código-fonte do projeto **Blog TI Verde**, desenvolvido como parte da disciplina **Desenvolvimento Sustentável na Engenharia** do quarto semestre do curso de **Engenharia da Computação** na **PUC-Campinas**. O projeto visa aprofundar os conceitos de desenvolvimento de sistemas web a partir da realização de um blog a respeito do tema **TI Verde**, conteúdo da disciplina.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Funcionalidades
+<ul>
+    <li>Realização de postagens ❌</li>
+    <li>Comentários ❌</li>
+    <li>Login social ❌</li>
+    <li>Entre outros...</li>
+</ul>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Como rodar
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+### Clonar repositório do Github
+*Pelo site do github:*
+```
+https://github.com/guiandradedev/green-it-blog.git
+```
+```sh
+cd sistema-administrativo/
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Crie o Arquivo .env
+```sh
+cp .env.example .env
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Atualize as variáveis de ambiente do arquivo .env
+```dosini
+APP_URL=http://localhost:8989
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+GOOGLE_REDIRECT=http://127.0.0.1:8000/auth/google/callback
+```
 
-## Laravel Sponsors
+Instalar as dependências PHP do projeto
+```sh
+composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Configure o sail
+```sh
+code ~/.bashrc
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+source ~/.bashrc
+```
 
-### Premium Partners
+> O código acima cadastra um "apelido" no terminal para reduzir os comandos a serem executados no container do laravel
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+<br>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Suba os containers do projeto
+```sh
+sail up -d --build
+```
+ou caso não tenha aplicado o alias
+```sh
+./vendor/bin/sail up -d --build
+```
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Gerar a key do projeto Laravel
+```sh
+sail artisan key:generate
+```
 
-## Security Vulnerabilities
+Executar as migrations
+```sh
+sail artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Inicializar os valores base no banco de dados
+```sh
+sail artisan db:seed
+```
 
-## License
+Fora do terminal docker, executar
+```sh
+npm install
+npm run dev
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Em um terceiro terminal, executar
+```sh
+sail artisan serve
+```
+
+Caso as imagens iniciais não renderizem, tente dentro do docker: 
+```sh
+sail artisan storage:link
+```
+
+Acessar o projeto
+<!-- [http://localhost:8080](http://localhost:8080) -->
