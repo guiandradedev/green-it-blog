@@ -10,6 +10,13 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
+
+                    @if (Auth::check())
+                        <h1>Bem-vindo, {{ Auth::user()->name }}!</h1>
+                        <p>Seu email é {{ Auth::user()->email }}</p>
+                    @else
+                        <p>Nenhum usuário está logado.</p>
+                    @endif
                 </div>
             </div>
         </div>
