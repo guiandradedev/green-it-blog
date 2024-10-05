@@ -24,7 +24,7 @@ class StoreCommentRequest extends FormRequest
     {
 
         return [
-            
+            'content' => 'required|string|max:500'
         ];
     }
 }

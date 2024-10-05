@@ -15,11 +15,7 @@ class CommentController extends Controller
         protected Comment $comment
     ) {}
 
-    public function store(Request $request){
-        // $request->validate([
-        //     'content' => 'required|string|max:500'
-        // ]);
-
+    public function store(StoreCommentRequest $request){
         $post = $this->post->where('slug', $request->post)->first();
         if(!$post) {
             return redirect()->back()->withErrors(['post'=> 'Este post nao existe.'])->withInput();
