@@ -35,5 +35,10 @@ class DatabaseSeeder extends Seeder
             'status'=> PostStatus::PUBLICADO,
             'owner_id'=>$user->id
         ]);
+
+        $this->call([
+            PermissionsSeeder::class,
+            UserSeeder::class
+        ]);
     }
 }

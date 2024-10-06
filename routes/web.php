@@ -18,9 +18,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource("post", PostController::class);    
     
-    Route::post("post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
+    Route::resource("/admin/post", PostController::class);    
+    
+    Route::post("/admin/post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
+
+    Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
 
 });
 

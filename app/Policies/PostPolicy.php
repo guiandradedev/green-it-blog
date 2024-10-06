@@ -13,7 +13,7 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->can('view any post');
     }
 
     /**
@@ -21,7 +21,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->can('create post');
     }
 
     /**
@@ -37,7 +37,11 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        //
+        if($post->owner_id == $user->id) {
+            return $user->can('update post');
+        }
+        
+        return $user->can('update any post');
     }
 
     /**
@@ -45,22 +49,10 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Post $post): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Post $post): bool
-    {
-        //
+        if($post->owner_id == $user->id) {
+            return $user->can('delete post');
+        }
+        
+        return $user->can('delete any post');
     }
 }

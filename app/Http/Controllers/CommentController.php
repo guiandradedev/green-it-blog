@@ -20,6 +20,8 @@ class CommentController extends Controller
         if(!$post) {
             return redirect()->back()->withErrors(['post'=> 'Este post nao existe.'])->withInput();
         }
+        $this->authorize('comment', [Comment::class, $post]);
+
 
         $this->comment->create([
             'content'=>$request->content,
@@ -29,5 +31,10 @@ class CommentController extends Controller
 
         return redirect()->route('post.show', $post->slug)
                          ->with('success', 'Comentário adicionado com sucesso!');
+    }
+
+    public function delete(Request $request) {
+        // $this->authorize('delete', [Comment::class, $comment]);
+
     }
 }

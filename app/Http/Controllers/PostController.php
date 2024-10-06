@@ -22,6 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', [Post::class]);
         $posts = $this->post->all();
         return view('post.index',['posts'=>$posts]);
     }
@@ -31,6 +32,8 @@ class PostController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [Post::class]);
+        
         return view('post.create');
     }
 
@@ -39,6 +42,8 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        $this->authorize('create', [Post::class]);
+
         $slug = sanitize_string($request->slug);
         if($this->post->where('slug', $slug)->first()) {
             return redirect()->back()->withErrors(['slug'=> 'Este slug já existe.'])->withInput();
@@ -52,7 +57,7 @@ class PostController extends Controller
             'owner_id' => Auth::user()->id,
         ]);
 
-        return redirect()->route('post.show',['post'=>$post->id])->with(['success'=>'Post criado com sucesso!']);
+        return redirect()->route('post.show',['post'=>$post->slug])->with(['success'=>'Post criado com sucesso!']);
     }
 
     /**
@@ -60,11 +65,13 @@ class PostController extends Controller
      */
     public function show(Request $request)
     {
+        
         $post = $this->post->where('slug', $request->post)->first();
         if(!$post) {
             return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
         }
-
+        
+        $this->authorize('view', [Post::class, $post]);
         $comments = $this->comments->where('post_id', $post->id)->get();
         // dd($comments);
 
@@ -80,6 +87,7 @@ class PostController extends Controller
         if(!$post) {
             return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
         }
+        $this->authorize('update', [Post::class, $post]);
 
         return view('post.update', ['post'=>$post]);
     }
@@ -93,6 +101,7 @@ class PostController extends Controller
         if(!$post) {
             return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
         }
+        $this->authorize('update', [Post::class, $post]);
         $slug = sanitize_string($request->slug);
         $post->update([
             'title' => $request->title,
@@ -109,6 +118,20 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', [Post::class, $post]);
         //
+    }
+
+    public function viewPost(Request $request) {
+        $post = $this->post->where('slug', $request->post)->first();
+        if(!$post) {
+            return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
+        }
+        
+        // $this->authorize('viewPost', [Post::class, $post]);
+        $comments = $this->comments->where('post_id', $post->id)->get();
+        // dd($comments);
+
+        return view('guest.viewPost', ['post'=>$post, 'comments'=>$comments]);
     }
 }
