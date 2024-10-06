@@ -168,6 +168,8 @@ class PostController extends Controller
         $comments = $this->comments->where('post_id', $post->id)->get();
         // dd($comments);
 
+        $post->update(['views'=>$post->views+1]);
+
         return view('guest.viewPost', ['post'=>$post, 'comments'=>$comments]);
     }
 

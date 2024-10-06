@@ -12,6 +12,7 @@
 
                 <p><strong>Título:  </strong> {{ $post->title}}</p><br>
                 <p><strong>Subtítulo:  </strong> {{ $post->subtitle}}</p><br>
+                <p><strong>Visualizacoes:  </strong> {{ $post->views}}</p><br>
 
                 <p><strong>Conteúdo: </strong> {!! $post->content !!}</p><br>
                 <h1>Imagem</h1>
