@@ -35,9 +35,14 @@
                     </form>
                     <hr>
                     @if(!count($comments) == 0)
-                        @foreach ($comments as $value)
-                            {{ $value['content'] }}
-                        
+                        @foreach ($comments as $comment)
+                        {{ $comment['content'] }}
+                        <form action="{{ route('post.comment.delete', ['post'=>$post->slug, 'comment'=>$comment->id]) }}" method="POST">
+                            @csrf()
+                            @method('delete')
+                            <button type="submit">Deletar</button>
+                        </form>
+                        <br>
                         @endforeach
                     @endif
                 </div>

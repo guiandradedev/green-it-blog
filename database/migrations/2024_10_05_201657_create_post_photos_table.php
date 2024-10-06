@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('file_size');
             $table->foreignId('post_id')->constrained(
                 table: 'posts', indexName: 'post_id'
-            );
+            )->onDelete('cascade');
             $table->timestamps();
         });
     }

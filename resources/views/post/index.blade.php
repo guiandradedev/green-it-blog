@@ -41,7 +41,7 @@
                                         <a href="{{ route('post.edit', $value['slug']) }}" title="Editar Post {{$value['slug']}}">✏️</a>
                                         <form action="{{ route('post.destroy', $value['slug']) }}" method="post" class="inline">
                                             @csrf
-                                            @method('destroy')
+                                            @method('delete')
                                             <button type="submit" title="Deletar Post {{$value['slug']}}">❌</button>
                                         </form>
                                     </td>

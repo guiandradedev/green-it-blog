@@ -139,10 +139,23 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request)
     {
+        $post = $this->post->where('slug', sanitize_string($request->post))->first();
+        if(!$post) {
+            return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
+        }
+
         $this->authorize('delete', [Post::class, $post]);
-        //
+
+        $this->comments->where('post_id', $post->id)->delete();
+        $this->photo->where('post_id', $post->id)->delete();
+
+        // remover da pasta depois
+
+        $post->delete();
+        
+        return redirect()->route('post.index')->with(['success'=>'Post deletado com sucesso!']);
     }
 
     public function viewPost(Request $request) {

@@ -34,7 +34,21 @@ class CommentController extends Controller
     }
 
     public function delete(Request $request) {
-        // $this->authorize('delete', [Comment::class, $comment]);
+        $post = $this->post->where('slug', sanitize_string($request->post))->first();
+        if(!$post) {
+            return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
+        }
+        
+        $comment = $this->comment->where('id', $request->comment)->first();
+        if(!$comment) {
+            return redirect()->back()->withErrors(['comment'=> 'Este comentário nao existe.'])->withInput();
+        }
+
+        $this->authorize('delete', [Comment::class, $comment]);
+
+        $comment->delete();
+        
+        return redirect()->back()->with(['success'=>'Comentário deletado com sucesso!']);
 
     }
 }

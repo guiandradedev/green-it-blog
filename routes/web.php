@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::resource("/admin/post", PostController::class);    
     
     Route::post("/admin/post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
+    Route::delete("/admin/post/{post}/comment", [CommentController::class, 'delete'])->name('post.comment.delete');
 
     Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
 
