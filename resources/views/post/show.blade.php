@@ -14,6 +14,8 @@
                 <p><strong>Subtítulo:  </strong> {{ $post->subtitle}}</p><br>
 
                 <p><strong>Conteúdo: </strong> {!! $post->content !!}</p><br>
+                <h1>Imagem</h1>
+                <img src="{{ asset('storage/thumbnails'. $post->thumbnail->file_path) }}" alt="">
 
                 <div class="flex items-center ml-auto float-down">
                     <a href="{{ route('post.edit', [$post->slug]) }}" class="bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded">

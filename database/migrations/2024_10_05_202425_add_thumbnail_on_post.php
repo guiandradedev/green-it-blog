@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            // $table->foreignId('thumbnail_id')->constrained(
-            //     table: 'post_photos', indexName:'post_thumbnail_id'
-            // )->nullable();
+            $table->foreignId('thumbnail_id')->nullable()->constrained(
+                table: 'post_photos', indexName:'post_thumbnail_id'
+            )->onDelete('set null');
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            // $table->dropColumn('thumbnail_id');
+            $table->dropColumn('thumbnail_id');
         });
     }
 };

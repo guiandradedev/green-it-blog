@@ -7,6 +7,7 @@ use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\PostPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,11 @@ class PostController extends Controller
 {
     public function __construct(
         protected Post $post,
-        protected Comment $comments
+        protected Comment $comments,
+        protected PostPhoto $photo
     ) {}
+
+    public static string $image_repository = '/app/public/thumbnails';
 
     /**
      * Display a listing of the resource.
@@ -48,6 +52,11 @@ class PostController extends Controller
         if($this->post->where('slug', $slug)->first()) {
             return redirect()->back()->withErrors(['slug'=> 'Este slug já existe.'])->withInput();
         }
+
+        $photo = $request->thumbnail;
+        if (!$photo->isValid()) {
+            return redirect()->back()->withErrors(['thumbnail'=> 'Foto inválida.'])->withInput();
+        }
         $post = $this->post->create([
             'title' => $request->title,
             'subtitle' => $request->subtitle,
@@ -56,6 +65,20 @@ class PostController extends Controller
             'status'=> $request->status ?? PostStatus::DESABILITADO->name,
             'owner_id' => Auth::user()->id,
         ]);
+
+        $photo = $request->thumbnail;
+        if($upload = $this->upload_image(photo: $photo))  {
+            $thumbnail = $this->photo->create([
+                'file_name'=>$upload['file_name'],
+                'file_path'=>$upload['file_path'],
+                'file_extension'=>$upload['file_extension'],
+                'mime_type'=>$upload['mime_type'],
+                'file_size'=>$upload['file_size'],
+                'post_id'=>$post->id,
+            ]);
+            $post->update(['thumbnail_id' => $thumbnail->id]);
+        }
+        
 
         return redirect()->route('post.show',['post'=>$post->slug])->with(['success'=>'Post criado com sucesso!']);
     }
@@ -134,4 +157,31 @@ class PostController extends Controller
 
         return view('guest.viewPost', ['post'=>$post, 'comments'=>$comments]);
     }
+
+    private function upload_image($photo) {
+        if ($photo->isValid()) {
+            $file_name = $photo->getClientOriginalName();
+            $file_extension = $photo->getClientOriginalExtension();
+            $file_size = $photo->getSize();
+            $mime_type = $photo->getMimeType();
+            
+            $imageName = sanitize_string(explode($file_extension, $file_name)[0]).time() . rand(1, 99) . '-.' . $file_extension;
+            $file_path = "/".$imageName;
+
+            // $foto->move(public_path('uploads'), $file_path);
+            $photo->move(storage_path(self::$image_repository), $imageName);
+
+            //$file_path = "/foods/".$imageName;
+
+            return [
+                "file_name"=>$file_name,
+                "file_extension"=>$file_extension,
+                "file_size"=>$file_size,
+                "mime_type"=>$mime_type,
+                "file_path"=>$file_path,
+            ];
+        }
+        return null;
+    }
+   
 }
