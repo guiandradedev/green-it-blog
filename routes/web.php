@@ -3,14 +3,11 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $posts = Post::all();
-
-    return view('welcome', ['posts'=>$posts]);
-})->name('home');
+Route::get('/', [SiteController::class, 'home'])->name('home');
 
 Route::get('/dashboard', function () {
     // $user = auth()->user();
@@ -18,8 +15,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/sobre', function(){})->name('about');
-Route::get('/blog', function(){})->name('blog');
+Route::get('/sobre', [SiteController::class, 'about'])->name('about');
+Route::get('/blog', [SiteController::class, 'blog'])->name('blog');
 Route::get('/contato', function(){})->name('contact');
 Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
 

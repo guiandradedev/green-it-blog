@@ -1,30 +1,78 @@
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Blog Template</title>
+    <meta name="author" content="David Grzyb">
+    <meta name="description" content="">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Tailwind -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        .font-family-karla {
+            font-family: karla;
+        }
+    </style>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+</head>
+<body class="bg-white font-family-karla">
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+    <!-- Top Bar Nav -->
+    <nav class="w-full py-4 bg-green-800 shadow">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between">
+            <nav>
+                <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
+                    <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('home') }}">INICIO</a></li>
+                    <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('about') }}">SOBRE NÓS</a></li>
+                    <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('blog') }}">POSTS</a></li>
+                    <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('contact') }}">CONTATO</a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
+                    <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('login') }}">ENTRAR</a></li>
+                    <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('register') }}">REGISTRAR</a></li>
+
+                </ul>
+            </nav>
         </div>
-    </body>
+
+    </nav>
+
+    <!-- Text Header -->
+    <header class="w-full container mx-auto">
+        <div class="flex flex-col items-center py-12">
+            <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
+                Green IT
+            </a>
+            <p class="text-lg text-gray-600">
+                Um simples blog sobre a TI Verde
+            </p>
+        </div>
+    </header>
+
+    <div class="container mx-auto flex flex-wrap py-6">
+        {{ $slot }}
+    </div>
+
+    <footer class="w-full border-t bg-white pb-12">
+        <div class="w-full container mx-auto flex flex-col items-center">
+            <div class="flex flex-row md:flex-row text-center md:text-left md:justify-between py-6">
+                <a href="{{ route('about') }}" class="uppercase px-3">Sobre nós</a>
+                <a href="{{ route('blog') }}" class="uppercase px-3">Posts</a>
+                <a href="{{ route('contact') }}" class="uppercase px-3">Contato</a>
+            </div>
+            <div class="uppercase pb-6">&copy; myblog.com</div>
+        </div>
+    </footer>
+
+</body>
 </html>

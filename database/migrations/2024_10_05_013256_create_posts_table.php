@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('subtitle');
             $table->text('content');
             $table->string('slug');
-            $table->foreignId('owner_id')->constrained(
-                table: 'users', indexName:'post_owner_id'
+            $table->foreignId('author_id')->constrained(
+                table: 'users', indexName:'post_author_id'
             );
             $table->integer('views')->default(0);
             $table->integer('likes')->default(0);

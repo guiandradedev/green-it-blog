@@ -1,88 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="author" content="Top autores">
-        <meta name="description" content="">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-        <style>
-            @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-    
-            .font-family-karla {
-                font-family: karla;
-            }
-            .thumbnail {
-                max-width: 100%;
-                max-height: 250px;
-                height: 100%;
-            }
-        </style>
-    
-        <!-- AlpineJS -->
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        <!-- Font Awesome -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-
-    <body class="bg-white font-family-karla">
-
-        <!-- Top Bar Nav -->
-        <nav class="w-full py-4 bg-green-800 shadow">
-            <div class="w-full container mx-auto flex flex-wrap items-center justify-between">
-    
-                <nav>
-                    <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
-                        <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('home') }}">INICIO</a></li>
-                        <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('about') }}">SOBRE NÓS</a></li>
-                        <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('blog') }}">POSTS</a></li>
-                        <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('contact') }}">CONTATO</a></li>
-                        <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('login') }}">ENTRAR</a></li>
-                        <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('register') }}">REGISTRAR</a></li>
-                    </ul>
-                </nav>
-    
-                <div class="flex items-center text-lg no-underline text-white pr-6">
-                    <a class="" href="#">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a class="pl-6" href="#">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a class="pl-6" href="#">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="pl-6" href="#">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
-            </div>
-    
-        </nav>
-    
-        <!-- Text Header -->
-        <header class="w-full container mx-auto">
-            <div class="flex flex-col items-center py-12">
-                <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl">
-                    Green IT
-                </a>
-                <p class="text-lg text-gray-600">
-                    Um simples blog sobre a TI Verde
-                </p>
-            </div>
-        </header>
-    
-    
-        <div class="container mx-auto flex flex-wrap py-6">    
-            <!-- Posts Section -->
+<x-guest-layout>
+    <style>
+        .thumbnail {
+            max-width: 300px;
+            widows: 100%;
+            max-height: 250px;
+            height: 100%;
+        }
+    </style>
             <section class="w-full md:w-2/3 flex flex-col items-center px-3">
                 @php
                     $limite_char = 100; // O número de caracteres que você deseja exibir
@@ -127,17 +51,4 @@
     
             </aside>
     
-        </div>
-    
-        <footer class="w-full border-t bg-white pb-12">
-            <div class="w-full container mx-auto flex flex-col items-center">
-                <div class="flex flex-row md:flex-row text-center md:text-left md:justify-between py-6">
-                    <a href="{{ route('about') }}" class="uppercase px-3">Sobre nós</a>
-                    <a href="{{ route('blog') }}" class="uppercase px-3">Posts</a>
-                    <a href="{{ route('contact') }}" class="uppercase px-3">Contato</a>
-                </div>
-                <div class="uppercase pb-6">&copy; myblog.com</div>
-            </div>
-        </footer>
-    </body>
-</html>
+</x-guest-layout>
