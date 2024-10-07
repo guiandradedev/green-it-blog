@@ -30,6 +30,8 @@ class SocialLoginController extends Controller
 
         Auth::login($user);
 
+        $user->assignRole('user');
+
         return redirect(route('dashboard'));
     }
 

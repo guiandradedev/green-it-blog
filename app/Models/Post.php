@@ -19,4 +19,8 @@ class Post extends Model
     {
         return $this->hasOne(PostPhoto::class, 'id');
     }
+
+    public function author() {
+        return $this->hasOne(User::class, 'id');
+    }
 }
