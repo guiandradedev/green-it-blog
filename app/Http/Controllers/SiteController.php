@@ -20,20 +20,23 @@ class SiteController extends Controller
         return view('guest.about');
     }
 
-    public function home() {
+    public function home(Request $request) {
         $posts = $this->post
         ->where('status', PostStatus::PUBLICADO->name)
-        ->get();
+        ->paginate($request->get('per_page', 3), ['*'], 'page', $request->get('page', 1));
     
         return view('welcome', ['posts'=>$posts]);
     }
     
-    public function blog() {
+    public function blog(Request $request) {
         $posts = $this->post
         ->where('status', PostStatus::PUBLICADO->name)
-        ->get();
+        ->paginate($request->get('per_page', 3), ['*'], 'page', $request->get('page', 1));
     
         return view('guest.blog', ['posts'=>$posts]);
+    }
 
+    public function author(Request $request) {
+        
     }
 }

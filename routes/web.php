@@ -20,7 +20,7 @@ Route::get('/blog', [SiteController::class, 'blog'])->name('blog');
 Route::get('/contato', function(){})->name('contact');
 Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
 
-Route::get('author/{author}', function() {dd('autor top');})->name('author.show');
+Route::get('author/{author}', [SiteController::class, 'author'])->name('author.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

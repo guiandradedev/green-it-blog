@@ -6,7 +6,7 @@
                 <p class="text-3xl font-bold text-green-700 hover:text-gray-700 pb-4">{{$post->title}}</p>
                 <p href="#" class="pb-6">{{ $post->subtitle }}</p>
                 <p href="#" class="text-sm">
-                    Publicado por <a href="{{ route('author.show', ['author'=>$post->author->id]) }}" class="font-semibold hover:text-gray-800 text-green-700">{{$post->author->name}}</a>
+                    Publicado por <a href="{{ route('author.show', ['author'=>$post->author->username]) }}" class="font-semibold hover:text-gray-800 text-green-700">{{$post->author->name}}</a>
                 </p>
                 <p href="#" class="text-sm pb-2">
                     Última atualização em {{$post->updated_at->translatedFormat('d \d\e F \d\e Y \à\s H:i')}}
