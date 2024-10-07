@@ -21,7 +21,7 @@
                     <a href="{{ route('post.viewPost', ['post'=>$post->slug]) }}" class="text-3xl font-bold hover:text-gray-700 pb-4 text-green-700">{{ $post->title }}</a>
                     <a href="{{ route('post.viewPost', ['post'=>$post->slug]) }}" class="pb-6">{{ $post->subtitle }}</a>
                     <p href="{{ route('post.viewPost', ['post'=>$post->slug]) }}" class="text-sm pb-3">
-                        Por <a href="{{ route('author.show', ['author'=>$post->author->id]) }}" class="font-semibold hover:text-gray-800">{{$post->author->name}} {{$post->created_at->format('d/m/Y')}} às {{$post->created_at->format('H')}}Hrs</a>
+                        Por <a href="{{ route('author.show', ['author'=>$post->author->username]) }}" class="font-semibold hover:text-gray-800">{{$post->author->name}} {{$post->updated_at->format('d/m/Y')}} às {{$post->created_at->format('H')}}Hrs</a>
                     </p>
                     {{-- <a href="#" class="pb-6">{{ mb_strimwidth($post->subtitle, 0, $limite_char, " ...") }}</a> --}}
                     <a href="{{ route('post.viewPost', ['post'=>$post->slug]) }}" class="uppercase text-gray-800 hover:text-black">Continuar leitura <i class="fas fa-arrow-right"></i></a>

@@ -39,19 +39,21 @@
 
         <div class="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
             <div class="w-full md:w-1/5 flex justify-center md:justify-start pb-4">
-                <img src="https://source.unsplash.com/collection/1346951/150x150?sig=1" class="rounded-full shadow h-32 w-32">
+                <img src="{{ asset('storage/avatars'. $post->author->avatar->file_path) }}" class="rounded-full shadow h-32 w-32">
             </div>
             <div class="flex-1 flex flex-col justify-center md:justify-start">
-                <p class="font-semibold text-2xl">{{ $post->author->name }}</p>
+                <a href="{{ route('author.show', ['author'=>$post->author->username]) }}">
+                    <p class="font-semibold text-2xl text-green-700 hover:text-gray-700">{{ $post->author->name }}</p>
+                </a>
                 <p class="pt-2">{{ $post->author->about }}</p>
                 <div class="flex items-center justify-center md:justify-start text-2xl no-underline text-green-800 pt-4">
                     @if($post->author->linkedin)
-                        <a class="" href="#">
+                        <a class="" href="{{ $post->author->linkedin }}" target="_blank">
                             <i class="fab fa-linkedin"></i>
                         </a>
                     @endif
                     @if($post->author->github)
-                        <a class="pl-4" href="#">
+                        <a class="pl-4" href="{{ $post->author->github }}" target="_blank">
                             <i class="fab fa-github"></i>
                         </a>
                     @endif
