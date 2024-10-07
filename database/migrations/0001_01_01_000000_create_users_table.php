@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('username')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default(bcrypt(Str::password(12)));
-            $table->string('google_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

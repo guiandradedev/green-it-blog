@@ -43,7 +43,5 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
-
-        <a href="/socialite/google">Login com google</a>
     </form>
 </x-guest-layout>

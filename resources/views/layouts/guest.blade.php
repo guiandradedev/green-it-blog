@@ -43,7 +43,6 @@
                         <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ url('/dashboard') }}">PAINEL</a></li>
                     @else
                         <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('login') }}">ENTRAR</a></li>
-                        <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('register') }}">REGISTRAR</a></li>
                     @endauth
 
                 </ul>
