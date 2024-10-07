@@ -60,6 +60,48 @@
                 </div>
             </div>
         </div>
+        <div class="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white p-6">
+            <div class="flex-1 flex flex-col justify-center md:justify-start" id="comentarios">
+                <h2 class="font-semibold text-2xl text-green-700 hover:text-gray-700">Comentarios</h2>
+                <div>
+                    <form action="{{ route('post.comment.store', ['post'=>$post->slug]) }}" method="POST" class="mt-4">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
+                              Nome
+                            </label>
+                            <input id="name" type="name" name="name"placeholder="Guilherme" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
+                              Email
+                            </label>
+                            <input id="email" type="email" name="email"placeholder="guilherme@email.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                            <p class="text-gray-500 text-sm mt-1">
+                              Não utilizaremos ele para spam.
+                            </p>
+                        </div>
+                          
+                          <div class="mb-4">
+                            <label for="content" class="block text-gray-700 text-sm font-bold mb-2">
+                              Comentário
+                            </label>
+                            <textarea id="content" name="content" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none" style="width: 100%; height: 150px;"></textarea>
+                          </div>
+                          <button class="bg-green-700 text-white font-bold py-2 px-4 rounded-md shadow-md hover:bg-indigo-700">
+                            Comentar
+                          </button>
+                          
+                    </form>
+                    <div>
+                        @foreach ($comments as $comment)
+                            <h1>{{ $comment->content }}</h1>
+                        @endforeach
+                        {{ $comments->links('components.pagination') }}
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </section>
 

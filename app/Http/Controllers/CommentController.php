@@ -20,35 +20,35 @@ class CommentController extends Controller
         if(!$post) {
             return redirect()->back()->withErrors(['post'=> 'Este post nao existe.'])->withInput();
         }
-        $this->authorize('comment', [Comment::class, $post]);
-
+        // $this->authorize('comment', [Comment::class, $post]);
 
         $this->comment->create([
             'content'=>$request->content,
-            'user_id'=>Auth::user()->id,
+            // 'user_id'=>Auth::user()->id,
+            'name'=>$request->name,
             'post_id'=>$post->id
         ]);
 
-        return redirect()->route('post.show', $post->slug)
+        return redirect()->route('post.viewPost', $post->slug)
                          ->with('success', 'Comentário adicionado com sucesso!');
     }
 
     public function delete(Request $request) {
-        $post = $this->post->where('slug', sanitize_string($request->post))->first();
-        if(!$post) {
-            return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
-        }
+        // $post = $this->post->where('slug', sanitize_string($request->post))->first();
+        // if(!$post) {
+        //     return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
+        // }
         
-        $comment = $this->comment->where('id', $request->comment)->first();
-        if(!$comment) {
-            return redirect()->back()->withErrors(['comment'=> 'Este comentário nao existe.'])->withInput();
-        }
+        // $comment = $this->comment->where('id', $request->comment)->first();
+        // if(!$comment) {
+        //     return redirect()->back()->withErrors(['comment'=> 'Este comentário nao existe.'])->withInput();
+        // }
 
-        $this->authorize('delete', [Comment::class, $comment]);
+        // $this->authorize('delete', [Comment::class, $comment]);
 
-        $comment->delete();
+        // $comment->delete();
         
-        return redirect()->back()->with(['success'=>'Comentário deletado com sucesso!']);
+        // return redirect()->back()->with(['success'=>'Comentário deletado com sucesso!']);
 
     }
 }

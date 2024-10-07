@@ -21,6 +21,7 @@ Route::get('/contato', function(){})->name('contact');
 Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
 
 Route::get('author/{author}', [SiteController::class, 'author'])->name('author.show');
+Route::post("/blog/post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,7 +30,6 @@ Route::middleware('auth')->group(function () {
     
     Route::resource("/admin/post", PostController::class);    
     
-    Route::post("/admin/post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
     Route::delete("/admin/post/{post}/comment", [CommentController::class, 'delete'])->name('post.comment.delete');
 });
 
