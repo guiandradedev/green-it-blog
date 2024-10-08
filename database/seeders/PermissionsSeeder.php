@@ -16,7 +16,7 @@ class PermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['user', 'mod', 'author', 'dev', 'owner'];
+        $roles = ['user', 'mod', 'author', 'dev', 'admin'];
         foreach ($roles as $role) {
             Role::create(['name' => $role]);
         }
@@ -27,17 +27,17 @@ class PermissionsSeeder extends Seeder
                 'mod',
                 'author',
                 'dev',
-                'owner'
+                'admin'
             ],
-            'view post'=>['user', 'mod', 'author', 'dev', 'owner'],
-            'create post'=>['mod', 'author', 'dev', 'owner'],
-            'update post'=>['mod', 'author', 'dev', 'owner'],
-            'update any post'=>['mod', 'owner'],
-            'delete post'=>['mod', 'author', 'dev', 'owner'],
-            'delete any post'=>['mod', 'owner'],
-            'comment'=>['user', 'mod', 'author', 'dev', 'owner'],
-            'delete comment'=>['user', 'mod', 'author', 'dev', 'owner'],
-            'delete any comment'=>['mod', 'owner'],
+            'view post'=>['user', 'mod', 'author', 'dev', 'admin'],
+            'create post'=>['mod', 'author', 'dev', 'admin'],
+            'update post'=>['mod', 'author', 'dev', 'admin'],
+            'update any post'=>['mod', 'admin'],
+            'delete post'=>['mod', 'author', 'dev', 'admin'],
+            'delete any post'=>['mod', 'admin'],
+            'comment'=>['user', 'mod', 'author', 'dev', 'admin'],
+            'delete comment'=>['user', 'mod', 'author', 'dev', 'admin'],
+            'delete any comment'=>['mod', 'admin'],
         ];
 
 

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'author'
     ];
 
     /**
@@ -48,6 +49,11 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'owner_id');
+        return $this->hasMany(Post::class);
+    }
+
+    public function avatar()
+    {
+        return $this->hasOne(UserPhoto::class);
     }
 }

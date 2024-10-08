@@ -3,16 +3,25 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SiteController::class, 'home'])->name('home');
 
 Route::get('/dashboard', function () {
     // $user = auth()->user();
+
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/sobre', [SiteController::class, 'about'])->name('about');
+Route::get('/blog', [SiteController::class, 'blog'])->name('blog');
+Route::get('/contato', function(){})->name('contact');
+Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
+
+Route::get('author/{author}', [SiteController::class, 'author'])->name('author.show');
+Route::post("/blog/post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -21,11 +30,7 @@ Route::middleware('auth')->group(function () {
     
     Route::resource("/admin/post", PostController::class);    
     
-    Route::post("/admin/post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
     Route::delete("/admin/post/{post}/comment", [CommentController::class, 'delete'])->name('post.comment.delete');
-
-    Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
-
 });
 
 

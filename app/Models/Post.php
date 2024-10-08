@@ -17,6 +17,11 @@ class Post extends Model
 
     public function thumbnail()
     {
-        return $this->hasOne(PostPhoto::class, 'id');
+        return $this->hasOne(PostPhoto::class);
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('social_logins', function (Blueprint $table) {
-            $table->id();
-            $table->string ('provider');
-            $table->string ('provider_id');
-            $table->foreignId( 'user_id');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('avatar_id')->nullable()->constrained(
+                table: 'user_photos', indexName:'user_avatar_id'
+            )->onDelete('set null');
         });
     }
 
@@ -25,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('social_logins');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('avatar_id');
+        });
     }
 };

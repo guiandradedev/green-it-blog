@@ -63,7 +63,7 @@ class PostController extends Controller
             'content' => $request->content,
             'slug' => $slug,
             'status'=> $request->status ?? PostStatus::DESABILITADO->name,
-            'owner_id' => Auth::user()->id,
+            'author_id' => Auth::user()->id,
         ]);
 
         $photo = $request->thumbnail;
@@ -159,19 +159,46 @@ class PostController extends Controller
     }
 
     public function viewPost(Request $request) {
-        $post = $this->post->where('slug', $request->post)->first();
-        if(!$post) {
-            return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
-        }
+        $post = $this->post->where('slug', $request->post)
+            ->where('status', PostStatus::PUBLICADO->name)
+            ->first();
         
-        // $this->authorize('viewPost', [Post::class, $post]);
-        $comments = $this->comments->where('post_id', $post->id)->get();
-        // dd($comments);
+        if (!$post) {
+            return redirect()->back()->withErrors(['slug'=> 'Este post não existe.'])->withInput();
+        }
 
-        $post->update(['views'=>$post->views+1]);
+        $previous = $this->post
+            ->where('id', '<', $post->id)
+            ->where('status', PostStatus::PUBLICADO->name)
+            ->orderBy('id', 'desc')
+            ->first();
 
-        return view('guest.viewPost', ['post'=>$post, 'comments'=>$comments]);
+        $next = $this->post
+            ->where('id', '>', $post->id)
+            ->where('status', PostStatus::PUBLICADO->name)
+            ->orderBy('id', 'asc')
+            ->first();
+
+        $post->update(['views' => $post->views + 1]);
+    
+        $comments = $this->comments->where('post_id', $post->id)
+        ->orderBy('created_at', 'desc')
+        ->paginate($request->get('per_page', 5), ['*'], 'page', $request->get('page', 1));
+
+        $viewMore = $this->post
+                        ->where('status', PostStatus::PUBLICADO->name)
+                        ->orderBy('created_at', 'desc')
+                        ->take(10)->get();
+    
+        return view('guest.viewPost', [
+            'post' => $post,
+            'comments' => $comments,
+            'previous' => $previous,
+            'next' => $next,
+            'viewMore'=>$viewMore
+        ]);
     }
+    
 
     private function upload_image($photo) {
         if ($photo->isValid()) {

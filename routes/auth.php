@@ -34,9 +34,6 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
-
-    Route::get("/socialite/{driver}", [SocialLoginController::class, "toProvider"])->where('driver', 'google')->name('auth.provider');
-    Route::get("/auth/{driver}/callback", [SocialLoginController::class, "handleCallback"])->where('driver', 'google')->name('auth.callback');
 });
 
 Route::middleware('auth')->group(function () {

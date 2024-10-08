@@ -24,7 +24,9 @@ class StoreCommentRequest extends FormRequest
     {
 
         return [
-            'content' => 'required|string|max:500'
+            'content' => 'required|string|max:500',
+            'name' => 'required|string|max:60',
+            'email' => 'required|string|max:60|email'
         ];
     }
 }
