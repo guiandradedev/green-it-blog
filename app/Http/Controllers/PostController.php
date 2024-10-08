@@ -182,6 +182,7 @@ class PostController extends Controller
         $post->update(['views' => $post->views + 1]);
     
         $comments = $this->comments->where('post_id', $post->id)
+        ->orderBy('created_at', 'desc')
         ->paginate($request->get('per_page', 5), ['*'], 'page', $request->get('page', 1));
 
         $viewMore = $this->post

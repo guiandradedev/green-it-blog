@@ -60,47 +60,62 @@
                 </div>
             </div>
         </div>
-        <div class="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white p-6">
-            <div class="flex-1 flex flex-col justify-center md:justify-start" id="comentarios">
-                <h2 class="font-semibold text-2xl text-green-700 hover:text-gray-700">Comentarios</h2>
-                <div>
-                    <form action="{{ route('post.comment.store', ['post'=>$post->slug]) }}" method="POST" class="mt-4">
-                        @csrf
-                        <div class="mb-4">
-                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
-                              Nome
-                            </label>
-                            <input id="name" type="name" name="name"placeholder="Guilherme" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                        </div>
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
-                              Email
-                            </label>
-                            <input id="email" type="email" name="email"placeholder="guilherme@email.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                            <p class="text-gray-500 text-sm mt-1">
-                              Não utilizaremos ele para spam.
-                            </p>
-                        </div>
-                          
-                          <div class="mb-4">
-                            <label for="content" class="block text-gray-700 text-sm font-bold mb-2">
-                              Comentário
-                            </label>
-                            <textarea id="content" name="content" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none" style="width: 100%; height: 150px;"></textarea>
-                          </div>
-                          <button class="bg-green-700 text-white font-bold py-2 px-4 rounded-md shadow-md hover:bg-indigo-700">
-                            Comentar
-                          </button>
-                          
-                    </form>
-                    <div>
-                        @foreach ($comments as $comment)
-                            <h1>{{ $comment->content }}</h1>
-                        @endforeach
-                        {{ $comments->links('components.pagination') }}
+        <div class="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white p-6" id="comentarios">
+            <div class="container mx-auto p-6 bg-gray-50 rounded-lg shadow-md">
+                <!-- Formulário de Comentários -->
+                <div class="mb-8">
+                  <h2 class="text-2xl font-bold text-gray-800 mb-4">Comentários</h2>
+                  <form action="{{ route('post.comment.store', ['post'=>$post->slug]) }}" method="POST">
+                    @csrf
+                    <div class="mb-6">
+                      <label for="name" class="block text-gray-700 font-medium mb-1">Nome</label>
+                      <input required id="name" type="name" name="name" placeholder="Guilherme" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 py-2 px-3 text-gray-700" />
                     </div>
+              
+                    <div class="mb-6">
+                      <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
+                      <input required id="email" type="email" name="email" placeholder="guilherme@email.com" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 py-2 px-3 text-gray-700" />
+                      <p class="text-gray-500 text-sm mt-1">Não utilizaremos ele para spam.</p>
+                    </div>
+              
+                    <div class="mb-6">
+                      <label for="content" class="block text-gray-700 font-medium mb-1">Comentário</label>
+                      <textarea required id="content" name="content" rows="5" placeholder="Escreva seu comentário aqui..." class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 py-2 px-3 text-gray-700 resize-y"></textarea>
+                    </div>
+              
+                    <button class="w-full bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                      Comentar
+                    </button>
+                  </form>
                 </div>
-            </div>
+              
+                <!-- Lista de Comentários -->
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-800 mb-4">Comentários Recentes</h3>
+                  @if($comments->total() != 0)
+                    <div class="space-y-4">
+                        @foreach ($comments as $comment)
+                        <div class="bg-white p-4 rounded-lg shadow-md">
+                            <div class="text-gray-600 text-sm mb-1">
+                                {{ $comment->name }} - {{ \Carbon\Carbon::parse($comment->created_at)->locale('pt_BR')->translatedFormat('d \d\e M. \d\e Y \à\s H:i') }}
+                            </div>
+                        <div class="text-gray-900 font-medium">
+                            {{ $comment->content }}
+                        </div>
+                        </div>
+                        @endforeach
+                    </div>
+                  @else
+                    <h4 class="text-md font-normal text-gray-800 mb-4">Sem comentários recentes</h4>
+                  @endif
+              
+                  <!-- Paginação -->
+                  <div class="mt-4">
+                    {{ $comments->links('components.pagination') }}
+                  </div>
+                </div>
+              </div>
+              
         </div>
 
     </section>

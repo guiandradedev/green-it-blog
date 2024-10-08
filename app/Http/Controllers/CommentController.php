@@ -26,11 +26,13 @@ class CommentController extends Controller
             'content'=>$request->content,
             // 'user_id'=>Auth::user()->id,
             'name'=>$request->name,
+            'email'=>$request->name,
             'post_id'=>$post->id
         ]);
 
-        return redirect()->route('post.viewPost', $post->slug)
-                         ->with('success', 'Comentário adicionado com sucesso!');
+        return redirect()->route('post.viewPost', $post->slug . '#comentarios')
+        ->with('success', 'Comentário adicionado com sucesso!');
+
     }
 
     public function delete(Request $request) {
