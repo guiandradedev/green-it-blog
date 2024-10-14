@@ -34,6 +34,8 @@
                     <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('about') }}">SOBRE NÓS</a></li>
                     <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('blog') }}">POSTS</a></li>
                     <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('contact') }}">CONTATO</a></li>
+                    <li><a class="hover:text-gray-200 hover:underline px-4" href="{{ route('ecomap.index') }}">ECOPONTOS</a></li>
+
                 </ul>
             </nav>
             
