@@ -7,6 +7,7 @@
     <title>EcoByte</title>
     <meta name="author" content="Engenharia de Computação PUC-Campinas">
     <meta name="description" content="">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/LogoGreenIt.png') }}">
 
     <!-- Tailwind -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
@@ -57,7 +58,7 @@
     <header class="w-full container mx-auto">
         <div class="flex flex-row items-center justify-center py-12"> <!-- Mantém flex-row e adiciona justify-center -->
             <div class="mr-4"> <!-- Adiciona margem à direita da imagem -->
-                <img src="{{ asset('images/logo.jpeg') }}" class="w-48" class="block"> <!-- Removido style para centralizar -->
+                <img src="{{ asset('images/LogoGreenIt.png') }}" class="w-48" class="block"> <!-- Removido style para centralizar -->
             </div>
             <div class="text-center"> <!-- Mantém o texto centralizado -->
                 <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
