@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\UserController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,8 @@ Route::get('/dashboard', function () {
 
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+//Route::get('/autor/{user}' ,[UserController::class, 'show'])->name('user.show');
 
 Route::get('/sobre', [SiteController::class, 'about'])->name('about');
 Route::get('/blog', [SiteController::class, 'blog'])->name('blog');

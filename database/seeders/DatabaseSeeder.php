@@ -26,18 +26,85 @@ class DatabaseSeeder extends Seeder
             'about' => 'Lorem ipsum dolor sit amet',
             'linkedin' => 'https://www.linkedin.com/in/guiandradedev/',
             'github' => 'https://github.com/guiandradedev',
-            'username' => 'andrade'
+            'username' => 'andrade',
+            'avatar' => '/5462680.1728232796994-.png'
+        ]);
+
+        $user2 = User::create([
+            'name' => 'Arnaldo',
+            'email' => 'arnaldo@teste.com',
+            'about' => 'Lorem ipsum dolor sit amet',
+            'linkedin' => 'https://www.linkedin.com/in/guiandradedev/',
+            'github' => 'https://github.com/guiandradedev',
+            'username' => 'arnaldo',
+            'avatar' => '/5462680.1728232796994-.png'
+
+        ]);
+
+        $user3 = User::create([
+            'name' => 'Ximenes',
+            'email' => 'ximenes@teste.com',
+            'about' => 'Lorem ipsum dolor sit amet',
+            'linkedin' => 'https://www.linkedin.com/in/guiandradedev/',
+            'github' => 'https://github.com/guiandradedev',
+            'username' => 'ximenes',
+            'avatar' => '/5462680.1728232796994-.png'
+
         ]);
         
-        $user_avatar = UserPhoto::create([
-            'file_name'=>"5462680.png",
-            'file_path'=>"/5462680.1728232796994-.png",
-            'file_extension'=>"png",
-            'mime_type'=>"image/png",
-            'file_size'=>36553,
-            'user_id'=>$user->id,
+        $user4 = User::create([
+            'name' => 'Luigi Shima',
+            'email' => 'luigishi@teste.com',
+            'about' => 'Lorem ipsum dolor sit amet',
+            'linkedin' => 'https://www.linkedin.com/in/guiandradedev/',
+            'github' => 'https://github.com/guiandradedev',
+            'username' => 'shima',
+            'avatar' => '/5462680.1728232796994-.png'
+
         ]);
-        $user->update(['avatar_id'=>$user_avatar->id]);
+
+        $user5 = User::create([
+            'name' => 'Luigi Garutti',
+            'email' => 'luigig@teste.com',
+            'about' => 'Lorem ipsum dolor sit amet',
+            'linkedin' => 'https://www.linkedin.com/in/guiandradedev/',
+            'github' => 'https://github.com/guiandradedev',
+            'username' => 'zanon',
+            'avatar' => '/5462680.1728232796994-.png'
+
+        ]);
+
+        $user6 = User::create([
+            'name' => 'Pedro Désio',
+            'email' => 'pedro@teste.com',
+            'about' => 'Lorem ipsum dolor sit amet',
+            'linkedin' => 'https://www.linkedin.com/in/guiandradedev/',
+            'github' => 'https://github.com/guiandradedev',
+            'username' => 'pedro',
+            'avatar' => '/5462680.1728232796994-.png'
+
+        ]);
+
+        $user7 = User::create([
+            'name' => 'Bruno Shimizu',
+            'email' => 'bruno@teste.com',
+            'about' => 'Lorem ipsum dolor sit amet',
+            'linkedin' => 'https://www.linkedin.com/in/guiandradedev/',
+            'github' => 'https://github.com/guiandradedev',
+            'username' => 'bruno',
+            'avatar' => '/5462680.1728232796994-.png'
+
+        ]);
+        
+        $user8 = User::create([
+            'name' => 'Rafael',
+            'email' => 'rafa@teste.com',
+            'about' => 'Lorem ipsum dolor sit amet',
+            'linkedin' => 'https://www.linkedin.com/in/guiandradedev/',
+            'github' => 'https://github.com/guiandradedev',
+            'username' => 'rafa',
+            'avatar' => '/5462680.1728232796994-.png'
+        ]);
 
         $post1 = Post::create([
             'title'=>'Queimadas da Amazônia',
@@ -98,7 +165,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             PermissionsSeeder::class,
-            UserSeeder::class
         ]);
 
         // CollectionPoint::factory()->count(10)->create();
