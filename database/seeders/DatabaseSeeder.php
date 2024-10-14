@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\PostStatus;
+use App\Models\CollectionPoint;
 use App\Models\Post;
 use App\Models\PostPhoto;
 use App\Models\User;
@@ -99,5 +100,18 @@ class DatabaseSeeder extends Seeder
             PermissionsSeeder::class,
             UserSeeder::class
         ]);
+
+        // CollectionPoint::factory()->count(10)->create();
+        
+        // CollectionPoint::create([
+        //     "name" => "Ecoponto Barão Geraldo", // Gera um nome de ponto de coleta
+        //     "address" => "Av. Santa Isabel, 2300",
+        //     "city" => "Campinas", // Seleciona uma cidade aleatória de SP
+        //     "state" => 'São Paulo', // Define o estado como São Paulo
+        //     "postal_code" =>"13084-012", // Gera um CEP válido para São Paulo
+        //     "latitude" => "-22.81730190695577", // Limita a latitude ao estado de SP
+        //     "longitude" => "-47.10042313868657", // Limita a longitude ao estado de SP
+        //     "description" =>fake()->sentence(),
+        // ]);
     }
 }

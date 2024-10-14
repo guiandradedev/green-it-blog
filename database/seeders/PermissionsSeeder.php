@@ -38,16 +38,8 @@ class PermissionsSeeder extends Seeder
             'comment'=>['user', 'mod', 'author', 'dev', 'admin'],
             'delete comment'=>['user', 'mod', 'author', 'dev', 'admin'],
             'delete any comment'=>['mod', 'admin'],
+            'import ecopoint'=>['mod', 'admin']
         ];
-
-
-
-
-
-
-
-
-
 
         foreach ($permissionsWithRole as $permission => $roles_permission) {
             $createdPermission = Permission::create(['name' => $permission]);
