@@ -9,22 +9,26 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('collection_points', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('city');
+            $table->string('state');
             $table->string('address');
-            $table->string('city')->nullable();
-            $table->string('neighborhood')->nullable();
-            $table->string('state')->nullable();
-            $table->string('postal_code')->nullable();
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();
-            $table->text('description')->nullable();
+            $table->string('neighborhood')->nullable();  // Se o bairro pode ser nulo
+            $table->string('postal_code');
+            $table->decimal('latitude', 10, 7);
+            $table->decimal('longitude', 10, 7);
+            $table->time('opening_hours');
+            $table->time('closing_hours');
+            $table->boolean('has_lunch')->default(false); // Almoço: Sim ou Não
+            $table->text('description')->nullable();      // Descrição pode ser nulo
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::resource("/admin/post", PostController::class);    
     
     Route::delete("/admin/post/{post}/comment", [CommentController::class, 'delete'])->name('post.comment.delete');
+
+    Route::get('/admin/import-collection-points', [CollectionPointController::class, 'import_page'])->name('ecomap.import_page');
+    Route::post('/admin/import-collection-points', [CollectionPointController::class, 'import'])->name('ecomap.import');
 });
 
 
