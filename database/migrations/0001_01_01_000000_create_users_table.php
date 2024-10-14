@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('github')->nullable();
             $table->text('about')->nullable();
             $table->string('username')->nullable();
+            $table->string('avatar')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default(bcrypt(Str::password(12)));
             $table->rememberToken();

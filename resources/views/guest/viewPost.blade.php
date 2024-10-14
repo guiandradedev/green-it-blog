@@ -39,7 +39,7 @@
 
         <div class="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
             <div class="w-full md:w-1/5 flex justify-center md:justify-start pb-4">
-                <img src="{{ asset('storage/avatars'. $post->author->avatar->file_path) }}" class="rounded-full shadow h-32 w-32">
+                <img src="{{ asset('storage/avatars'. $post->author->avatar) }}" class="rounded-full shadow h-32 w-32">
             </div>
             <div class="flex-1 flex flex-col justify-center md:justify-start">
                 <a href="{{ route('author.show', ['author'=>$post->author->username]) }}">
