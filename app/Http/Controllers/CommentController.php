@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PostStatus;
 use App\Http\Requests\Post\Comment\StoreCommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
@@ -27,7 +28,7 @@ class CommentController extends Controller
             // 'user_id'=>Auth::user()->id,
             'name'=>$request->name,
             'email'=>$request->name,
-            'post_id'=>$post->id
+            'post_id'=>$post->id,
         ]);
 
         return redirect()->route('post.viewPost', $post->slug . '#comentarios')

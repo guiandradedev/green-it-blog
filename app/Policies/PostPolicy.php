@@ -37,7 +37,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        if($post->owner_id == $user->id) {
+        if($post->author_id == $user->id) {
             return $user->can('update post');
         }
         
@@ -49,7 +49,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        if($post->owner_id == $user->id) {
+        if($post->author_id == $user->id) {
             return $user->can('delete post');
         }
         
