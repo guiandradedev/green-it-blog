@@ -9,7 +9,7 @@
                     Publicado por <a href="{{ route('author.show', ['author'=>$post->author->username]) }}" class="font-semibold hover:text-gray-800 text-green-700">{{$post->author->name}}</a>
                 </p>
                 <p href="#" class="text-sm pb-2">
-                    Última atualização em {{$post->updated_at->translatedFormat('d \d\e F \d\e Y \à\s H:i')}}
+                    Última atualização em {{$post->created_at->translatedFormat('d \d\e F \d\e Y \à\s H:i')}}
                 </p>
                 <hr>
                 <div class="flex justify-center"> 
@@ -125,7 +125,7 @@
 
         <div class="w-full bg-white shadow flex flex-col my-4 p-6">
             <p class="text-xl font-semibold pb-5">Sobre Nós</p>
-            <p class="pb-2">Bem-vindo ao Green IT! Fundado em 2023, o Green IT surgiu da necessidade de promover um setor de tecnologia mais sustentável e consciente.</p>
+            <p class="pb-2">Bem-vindo ao EcoByte! Fundado em 2024, o EcoByte surgiu da necessidade de promover um setor de tecnologia mais sustentável e consciente.</p>
             <a href="#" class="w-full bg-green-800 text-white font-bold text-sm uppercase rounded hover:bg-green-700 flex items-center justify-center px-2 py-3 mt-4">
                 Saiba mais
             </a>

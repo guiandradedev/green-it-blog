@@ -14,7 +14,7 @@
         @foreach ($posts as $post)
             <article class="flex flex-row shadow my-4 w-full">
                 <!-- Article Image -->
-                <a href="#" class="hover:opacity-75 p-2">
+                <a href="{{ route('post.viewPost', ['post'=>$post->slug]) }}" class="hover:opacity-75 p-2">
                     <img src="{{ asset('storage/thumbnails'. $post->thumbnail->file_path) }}" class="thumbnail">
                 </a>
                 <div class="bg-white flex flex-col justify-start p-6">
