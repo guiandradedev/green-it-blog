@@ -52,6 +52,8 @@ class PostController extends Controller
     {
         $this->authorize('create', [Post::class]);
 
+        dd($request);
+
         $slug = sanitize_string($request->slug);
         if($this->post->where('slug', $slug)->first()) {
             return redirect()->back()->withErrors(['slug'=> 'Este slug já existe.'])->withInput();

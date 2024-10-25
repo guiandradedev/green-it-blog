@@ -21,7 +21,10 @@ Route::get('/dashboard', function () {
 
 Route::get('/sobre', [SiteController::class, 'about'])->name('about');
 Route::get('/blog', [SiteController::class, 'blog'])->name('blog');
-Route::get('/contato', function(){})->name('contact');
+Route::get('/contato', [SiteController::class, 'contact'])->name('contact');
+Route::get('/contato/store', [SiteController::class, 'contactStore'])->name('contact.store');
+Route::get('/contatos', [SiteController::class, 'contactIndex'])->name('contact.index');
+
 
 Route::get('/ecomap',[CollectionPointController::class, 'index'])->name('ecomap.index');
 Route::get('/api/ecomap',[CollectionPointController::class, 'list_ecomaps'])->name('ecomap.list');

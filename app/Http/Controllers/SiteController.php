@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\PostStatus;
+use App\Http\Requests\StoreContactRequest;
 use App\Models\Comment;
+use App\Models\Contact;
 use App\Models\Post;
 use App\Models\PostPhoto;
 use App\Models\User;
@@ -15,7 +17,8 @@ class SiteController extends Controller
         protected Post $post,
         protected Comment $comments,
         protected PostPhoto $photo,
-        protected User $user
+        protected User $user,
+        protected Contact $contact
     ) {}
 
     public function about() {
@@ -65,5 +68,38 @@ class SiteController extends Controller
             ->paginate($request->get('per_page', 3), ['*'], 'page', $request->get('page', 1));
 
         return view('author.show', ['author'=>$user, 'posts'=>$posts, 'authorPosts'=>$author_posts]);
+    }
+
+    public function contact(){
+        $posts = $this->post
+        ->where('status', PostStatus::PUBLICADO->name)
+        ->orderBy('created_at', 'desc')
+        ->take(10)->get();
+        return view('guest.contact',['posts'=>$posts]);
+    }
+
+    public function contactStore(StoreContactRequest $request){
+        //$this->authorize('create', [Post::class]);
+
+        dd($request);
+
+        $contact = $this->contact->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'content' => $request->content
+        ]);
+        
+        return redirect()->route('blog');
+    }
+
+    public function contactIndex(){
+        $contacts = $this->contact->all();
+
+        return view('admin.contact.index',['contacts'=>$contacts]);
+    }
+
+    public function contactView(){
+
+        return view('admin.')
     }
 }
