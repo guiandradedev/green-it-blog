@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
             'avatar' => '/5462680.1728232796994-.png',
             'password'=>Hash::make('password')
         ]);
+        $user->assignRole('admin');
+
 
         $user2 = User::create([
             'name' => 'Arnaldo',

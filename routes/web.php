@@ -30,6 +30,7 @@ Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewP
 
 Route::get('author/{author}', [SiteController::class, 'author'])->name('author.show');
 Route::post("/blog/post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
+Route::get('/api/blog/create/webscraping', [PostController::class, 'webscraping'])->name('api.blog.webscraping');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/import-collection-points', [CollectionPointController::class, 'import_page'])->name('ecomap.import_page');
     Route::post('/admin/import-collection-points', [CollectionPointController::class, 'import'])->name('ecomap.import');
+
 });
 
 
