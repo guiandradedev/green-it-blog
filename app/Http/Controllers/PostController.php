@@ -62,7 +62,7 @@ class PostController extends Controller
             'subtitle' => $request->subtitle,
             'content' => $request->content,
             'slug' => $slug,
-            'status'=> $request->status ?? PostStatus::DESABILITADO->name,
+            'status'=> $request->status ?? PostStatus::PUBLICADO->name,
             'author_id' => Auth::user()->id,
         ]);
 
@@ -131,7 +131,7 @@ class PostController extends Controller
             'subtitle' => $request->subtitle,
             'content' => $request->content,
             'slug' => $slug,
-            'status'=> $request->status ?? PostStatus::DESABILITADO->name,
+            // 'status'=> $request->status ?? PostStatus::DESABILITADO->name,
         ]);
         return redirect()->route('post.edit', ['post'=>$slug])->with(['success'=>'Post atualizado com sucesso!']);
     }

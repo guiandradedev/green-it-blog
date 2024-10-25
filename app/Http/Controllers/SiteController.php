@@ -32,6 +32,7 @@ class SiteController extends Controller
     public function home(Request $request) {
         $posts = $this->post
         ->where('status', PostStatus::PUBLICADO->name)
+        ->orderBy('created_at', 'desc')
         ->paginate($request->get('per_page', 3), ['*'], 'page', $request->get('page', 1));
     
         return view('welcome', ['posts'=>$posts]);
@@ -40,6 +41,7 @@ class SiteController extends Controller
     public function blog(Request $request) {
         $posts = $this->post
         ->where('status', PostStatus::PUBLICADO->name)
+        ->orderBy('created_at', 'desc')
         ->paginate($request->get('per_page', 3), ['*'], 'page', $request->get('page', 1));
     
         return view('guest.blog', ['posts'=>$posts]);

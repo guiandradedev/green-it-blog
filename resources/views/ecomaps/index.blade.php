@@ -23,7 +23,8 @@
                 data.forEach(point => {
                     L.marker([point.latitude, point.longitude])
                         .addTo(map)
-                        .bindPopup(`<b>${point.name}</b><br>${point.address}`);
+                        .bindPopup(`<b>${point.name}</b><br>${point.address}, ${point.postal_code}<br>${point.city}-${point.state}<br>Funcionamento: ${point.opening_hours} as ${point.closing_hours}`);
+                        // <br><br>Descrição: ${point.description}
                 });
             })
             .catch(error => {
