@@ -100,6 +100,6 @@ class SiteController extends Controller
 
     public function contactView(){
 
-        return view('admin.')
+        return view('admin.');
     }
 }
