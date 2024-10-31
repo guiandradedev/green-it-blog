@@ -22,6 +22,19 @@
     
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.0/ckeditor5.css" />
+        <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5-premium-features/43.3.0/ckeditor5-premium-features.css" />
+        <script type="importmap">
+            {
+                "imports": {
+                    "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.3.0/ckeditor5.js",
+                    "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.3.0/",
+                    "ckeditor5-premium-features": "https://cdn.ckeditor.com/ckeditor5-premium-features/43.3.0/ckeditor5-premium-features.js",
+                    "ckeditor5-premium-features/": "https://cdn.ckeditor.com/ckeditor5-premium-features/43.3.0/"
+                }
+            }
+        </script>
+        <script type="module" src="{{ URL::asset('assets/vendor/ckeditor5.js') }}"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 

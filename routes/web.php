@@ -21,9 +21,10 @@ Route::get('/dashboard', function () {
 
 Route::get('/sobre', [SiteController::class, 'about'])->name('about');
 Route::get('/blog', [SiteController::class, 'blog'])->name('blog');
+
 Route::get('/contato', [SiteController::class, 'contact'])->name('contact');
-Route::get('/contato/store', [SiteController::class, 'contactStore'])->name('contact.store');
-Route::get('/contatos', [SiteController::class, 'contactIndex'])->name('contact.index');
+Route::post('/contato/store', [SiteController::class, 'contactStore'])->name('contact.store');
+
 
 
 Route::get('/ecomap',[CollectionPointController::class, 'index'])->name('ecomap.index');
@@ -36,6 +37,8 @@ Route::post("/blog/post/{post}/comment", [CommentController::class, 'store'])->n
 Route::get('/api/blog/create/webscraping', [PostController::class, 'webscraping'])->name('api.blog.webscraping');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/admin/contato', [SiteController::class, 'contactIndex'])->name('contact.index');
+    Route::get('/admin/contato/{id}', [SiteController::class, 'contactShow'])->name('contact.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

@@ -81,15 +81,13 @@ class SiteController extends Controller
     public function contactStore(StoreContactRequest $request){
         //$this->authorize('create', [Post::class]);
 
-        dd($request);
-
-        $contact = $this->contact->create([
+        $this->contact->create([
             'name' => $request->name,
             'email' => $request->email,
             'content' => $request->content
         ]);
         
-        return redirect()->route('blog');
+        return redirect()->route('home');
     }
 
     public function contactIndex(){
@@ -98,8 +96,9 @@ class SiteController extends Controller
         return view('admin.contact.index',['contacts'=>$contacts]);
     }
 
-    public function contactView(){
+    public function contactShow(Request $request){
+        $contact = $this->contact->where('id',$request->id)->first();
 
-        return view('admin.');
+        return view('admin.contact.show',['contact'=>$contact]);
     }
 }

@@ -161,7 +161,26 @@ class DatabaseSeeder extends Seeder
         ]);
         $post2->update(['thumbnail_id'=>$photo2->id]);
 
+        $post3 = Post::create([
+            'title'=>'',
+            'subtitle'=>'',
+            'slug'=>sanitize_string(''),
+            'content'=> '',
+            'status'=> PostStatus::PUBLICADO,
+            'author_id'=>$user3->id
+        ]);
 
+        $photo3 = PostPhoto::create([
+            'file_name'=>"data_center_facebook.jpeg.png",
+            'file_path'=>"/data_center_facebook.172921706716-.jpeg",
+            'file_extension'=>"jpeg",
+            'mime_type'=>"image/jpeg",
+            'file_size'=>180197,
+            'post_id'=>$post3->id,
+        ]);
+        $post3->update(['thumbnail_id'=>$photo3->id]);
+ 
+ 
         // $post1 = Post::create([
         //     'title'=>'Reducao do consumo de energia em data center',
         //     'subtitle'=>'lorem ipsum dolor sit amet, consectetur dispising elit',

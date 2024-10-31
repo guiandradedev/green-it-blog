@@ -2,25 +2,28 @@
     <section class="w-full md:w-2/3 flex flex-col items-center px-3">
         <article class="flex flex-col shadow my-4 w-full">
             <div class="bg-white flex flex-col justify-start p-6">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('contact.store') }}">
+                    @csrf
+                    @method('POST')
                     <!-- Nome -->
                     <div class="my-2">
                         <x-input-label for="name" :value="__('Nome')" />
-                        <x-text-input id="name" class="block mt-1 p-2 w-full" type="name" name="name" :value="old('name')" required autofocus autocomplete="username" />
+                        <x-text-input id="name" class="block mt-1 p-2 w-full" type="name" placeholder="Nome" name="name" :value="old('name')" required autofocus autocomplete="username" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <!-- Email -->
                     <div class="my-2">
                         <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="block mt-1 w-full p-2" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        <x-text-input id="email" class="block mt-1 w-full p-2" type="email" name="email" placeholder="email" :value="old('email')" required autofocus autocomplete="username" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <!-- Text -->
                     <div class="mt-4">
-                            <label class="block mt-1 w-full" for="qnt_invited">
+                    <x-input-label for="name" :value="__('Conteúdo da Mensagem')" />
+                            <!-- <label class="block mt-1 w-full p-4" for="qnt_invited">
                                 Conteúdo da Mensagem
-                            </label>
+                            </label> -->
                             <textarea class="block mt-1 w-full" name="content" id="content" cols="30" rows="5" placeholder="Corpo do Texto">{{old('content')}}</textarea>
                     </div>
 

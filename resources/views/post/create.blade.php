@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script> --}}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <div class="py-12">
@@ -102,7 +102,8 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+
         const buttons = document.querySelectorAll('.generate-abnt-button');
         let counter = 0;
 
@@ -189,10 +190,6 @@
             // const accessed_at = document.querySelectorAll(".accessed_at")
             // const references = document.querySelectorAll(".references")
         })
-        ClassicEditor
-            .create( document.querySelector( '#content' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+
     </script>
 </x-app-layout>

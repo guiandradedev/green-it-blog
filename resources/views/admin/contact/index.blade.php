@@ -36,8 +36,7 @@
                                         </a>
                                     </td>
                                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">
-                                        <a href="{{ route('post.show', $value['id']) }}" title="Visualizar Post {{$value['id']}}">👁️</a>
-                                        <a href="{{ route('post.edit', $value['id']) }}" title="Editar Post {{$value['id']}}">✏️</a>
+                                        <a href="{{ route('contact.show', $value['id']) }}" title="Visualizar Post {{$value['id']}}">👁️</a>
                                     </td>
                                 </tr>
                                 @endforeach
