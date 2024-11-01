@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\PostStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePostRequest extends FormRequest
+class StoreContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +23,9 @@ class StorePostRequest extends FormRequest
     {
 
         return [
-            'title' => 'required|max:255|string',
-            'subtitle' => 'required|max:255|string',
+            'name' => 'required|max:255|string',
+            'email' => 'required|string|email',
             'content' => 'required|string',
-            'slug' => 'required|max:255|string',
-            'status'=>['in:' . implode(',', PostStatus::array())],
-            // 'foods_photo' => 'required|array',
-            // 'foods_photo.*' => 'required|image|mimes:png,jpg,jpeg',
         ];
     }
 }
