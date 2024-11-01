@@ -2,6 +2,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <section class="w-full flex flex-col items-center px-3">
+        <p class="text-md text-gray-600">A logística reversa é um instrumento que se da por um conjunto de ações, visando garantir um reinserção do resíduo na cadeia produtiva e/ou dar um destinação correta para esse lixo. Pode-se citar como exemplo o lixo eletrônico que caso não haja a destinação correta, pode gerar contaminação do solo e água, incêndios e outros danos a saúde pública. No Brasil é tratada pela lei de número 12.305 de 2010, a qual deixa o manejo adequado desse tipo de resíduo com as empresas que os produzem.</p>
+        @if($post)
+            <p class="text-lg text-gray-600">Para saber mais sobre este tema, <a href="{{ route('post.viewPost', ['post'=>$post->slug]) }}" class="text-blue-600 font-bold">clique aqui</a></p>
+        @endif
+        <br>
         <p class="text-lg text-gray-600">Nesta página mostramos os principais ecopontos de Campinas e região.</p>
         <div id="map" style="height: 500px; width: 1000px"></div>
     </section>

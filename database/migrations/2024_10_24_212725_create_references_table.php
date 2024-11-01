@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('link');
             $table->datetime('accessed_at');
-            $table->string('reference');
+            $table->text('reference');
             $table->foreignId('post_id')->constrained(
                 table: 'posts', indexName: 'references_post_id'
             )->onDelete('cascade');

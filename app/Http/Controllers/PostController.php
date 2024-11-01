@@ -8,6 +8,7 @@ use App\Http\Requests\Post\StorePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\PostPhoto;
+use App\Models\References;
 use Carbon\Carbon;
 use DateTime;
 use Exception;
@@ -20,7 +21,8 @@ class PostController extends Controller
     public function __construct(
         protected Post $post,
         protected Comment $comments,
-        protected PostPhoto $photo
+        protected PostPhoto $photo,
+        protected References $references
     ) {}
 
     public static string $image_repository = '/app/public/thumbnails';
@@ -170,7 +172,6 @@ class PostController extends Controller
         if (!$post) {
             return redirect()->back()->withErrors(['slug'=> 'Este post não existe.'])->withInput();
         }
-
         $previous = $this->post
             ->where('id', '<', $post->id)
             ->where('status', PostStatus::PUBLICADO->name)
@@ -193,12 +194,15 @@ class PostController extends Controller
                         ->where('status', PostStatus::PUBLICADO->name)
                         ->orderBy('created_at', 'desc')
                         ->take(10)->get();
-    
+        
+        $references = $this->references->where('post_id', $post->id)->get();
+                        
         return view('guest.viewPost', [
             'post' => $post,
             'comments' => $comments,
             'previous' => $previous,
             'next' => $next,
+            'references'=>$references,
             'viewMore'=>$viewMore
         ]);
     }

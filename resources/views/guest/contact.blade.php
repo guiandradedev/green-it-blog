@@ -8,13 +8,13 @@
                     <!-- Nome -->
                     <div class="my-2">
                         <x-input-label for="name" :value="__('Nome')" />
-                        <x-text-input id="name" class="block mt-1 p-2 w-full" type="name" placeholder="Nome" name="name" :value="old('name')" required autofocus autocomplete="username" />
+                        <x-text-input id="name" class="block mt-1 p-2 w-full" type="name" placeholder="Nome" name="Insira seu nome" :value="old('name')" required autofocus autocomplete="username" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <!-- Email -->
                     <div class="my-2">
                         <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="block mt-1 w-full p-2" type="email" name="email" placeholder="email" :value="old('email')" required autofocus autocomplete="username" />
+                        <x-text-input id="email" class="block mt-1 w-full p-2" type="email" name="email" placeholder="Insira seu e-mail" :value="old('email')" required autofocus autocomplete="username" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 

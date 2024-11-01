@@ -6,11 +6,13 @@ use App\Enums\PostStatus;
 use App\Models\CollectionPoint;
 use App\Models\Post;
 use App\Models\PostPhoto;
+use App\Models\References;
 use App\Models\User;
 use App\Models\UserPhoto;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use League\CommonMark\Reference\Reference;
 
 class DatabaseSeeder extends Seeder
 {
@@ -127,21 +129,56 @@ class DatabaseSeeder extends Seeder
             'title'=>'Data Centers Sustentáveis',
             'subtitle'=>'Como data centers em climas frios reduzem os custos de energia',
             'slug'=>sanitize_string('Como data centers em climas frios reduzem os custos de energia'),
-            'content'=> '<p>Com o aumento da demanda por processamento de dados, o consumo de energia tornou-se uma das principais preocupações para o futuro. A necessidade de construção de novos data centers para armazenar e processar dados traz consigo um desafio, como manter os servidores resfriados e economizar energia?</p><p>Para entender a resposta a essa pergunta, primeiro devemos compreender como o consumo de energia no mundo tem aumentado nos últimos anos, principalmente devido a chegada de novas tecnologias</p><p>&nbsp;</p><p><strong>A mudança no consumo de energia ao longo dos anos</strong></p><p>Em um estudo publicado pela Agência Internacional de Energia (IEA em inglês), haverá um crescimento de cerca de 4% no consumo global de energia em 2024, com chance de se manter da forma em 2025. A nível de comparação, esse aumento será a maior taxa de crescimento desde 2007.</p><p>O principal motivo do aumento exponencial apresentado está relacionado com a popularização da inteligência artificial (IA), que se incorporou ao mundo atual com exemplos conhecidos, como o ChatGPT.</p><p>Com a vinda da IA na sociedade moderna, a criação de novos data centers se torna uma necessidade crucial para o processamento dos dados necessários para que a tecnologia funcione. Porém, isso cria a necessidade de construir novos sistemas de refrigeração, para manter os servidores funcionando de maneira adequada.</p><p>Para termos uma noção do crescimento, segundo a IEA, até 2026, o aumento na demanda de data centers deve crescer até 3% em 2026, o que é menor que o crescimento do uso de veículos elétricos nesse mesmo período, 2%.</p><p>&nbsp;</p><p><strong>A sustentabilidade como um atrativo</strong></p><p>Para solucionar o problema da refrigeração, empresas como a Google, o Facebook e a Microsoft têm abordado a questão de maneira criativa, construindo data centers em regiões naturalmente frias.</p><p>Localizado a cerca de 70 milhas ao sul do Círculo Polar Ártico, em Luleå, na Suécia, o data center do Facebook utiliza a própria água fria proveniente do oceano para resfriar seus servidores, eliminando a necessidade de sistemas de refrigeradores mecânicos convencionais, que consomem muita energia. Segundo a própria empresa, a redução nos custos de construção do estabelecimento foi de quase 40%, pois não foi necessário incluir refrigeradores no processo.</p><p>Em média, a construção dessas instalações custa em torno de 15 milhões de dólares para cada megawatt de capacidade. O uso de refrigeração gratuita reduziu os custos em 40%.</p><p>&nbsp;</p><p>A escolha do território, porém, não se trata apenas do clima mais frio, mas também do uso de energia sustentável.</p><p>Regiões como a Suécia e a Islândia geram mais energia per capita do que qualquer outra. Devido ao uso de fontes de energia hidrelétrica e geotérmica elas são capazes de produzir energia sustentável a longo prazo, com poucas pessoas utilizando-as no momento. Portanto, há uma grande capacidade de atender a demanda elétrica de novos data centers, possibilitando que novas empresas construam suas instalações nas proximidades.</p><p>A sustentabilidade acaba sendo um grande atrativo, pois permite que empresas melhorem sua reputação ambiental e economizem um dinheiro considerável. O uso de energia sustentável contribui para uma grande redução nos custos e na emissão de carbono na atmosfera, permitindo que as novas tecnologias sejam utilizadas em conjunto com o meio ambiente</p><p>&nbsp;</p><p><strong>Referências Bibliográficas:</strong></p><p><a href="https://www.theregister.com/2016/05/12/power_in_a_cold_climate/"><strong>https://www.theregister.com/2016/05/12/power_in_a_cold_climate/</strong></a></p><p><a href="https://www.datacenterdynamics.com/en/news/solar-energy-could-power-data-centers-in-cold-climates-study/">https://www.datacenterdynamics.com/en/news/solar-energy-could-power-data-centers-in-cold-climates-study/</a></p><p><a href="https://netrality.com/data-centers/making-data-centers-cool/">https://netrality.com/data-centers/making-data-centers-cool/</a></p><p><a href="https://megawhat.energy/mercado-energetico/consumo/temperaturas-mais-altas-data-centers-e-precos-negativos-o-futuro-do-consumo-global-de-energia/">https://megawhat.energy/mercado-energetico/consumo/temperaturas-mais-altas-data-centers-e-precos-negativos-o-futuro-do-consumo-global-de-energia/</a></p><p>&nbsp;</p>',
+            'content'=> '<p>Com o aumento da demanda por processamento de dados, o consumo de energia tornou-se uma das principais preocupações para o futuro. A necessidade de construção de novos data centers para armazenar e processar dados traz consigo um desafio, como manter os servidores resfriados e economizar energia?</p><p>Para entender a resposta a essa pergunta, primeiro devemos compreender como o consumo de energia no mundo tem aumentado nos últimos anos, principalmente devido a chegada de novas tecnologias</p><p>&nbsp;</p><p><strong>A mudança no consumo de energia ao longo dos anos</strong></p><p>Em um estudo publicado pela Agência Internacional de Energia (IEA em inglês), haverá um crescimento de cerca de 4% no consumo global de energia em 2024, com chance de se manter da forma em 2025. A nível de comparação, esse aumento será a maior taxa de crescimento desde 2007.</p><p>O principal motivo do aumento exponencial apresentado está relacionado com a popularização da inteligência artificial (IA), que se incorporou ao mundo atual com exemplos conhecidos, como o ChatGPT.</p><p>Com a vinda da IA na sociedade moderna, a criação de novos data centers se torna uma necessidade crucial para o processamento dos dados necessários para que a tecnologia funcione. Porém, isso cria a necessidade de construir novos sistemas de refrigeração, para manter os servidores funcionando de maneira adequada.</p><p>Para termos uma noção do crescimento, segundo a IEA, até 2026, o aumento na demanda de data centers deve crescer até 3% em 2026, o que é menor que o crescimento do uso de veículos elétricos nesse mesmo período, 2%.</p><p>&nbsp;</p><p><strong>A sustentabilidade como um atrativo</strong></p><p>Para solucionar o problema da refrigeração, empresas como a Google, o Facebook e a Microsoft têm abordado a questão de maneira criativa, construindo data centers em regiões naturalmente frias.</p><p>Localizado a cerca de 70 milhas ao sul do Círculo Polar Ártico, em Luleå, na Suécia, o data center do Facebook utiliza a própria água fria proveniente do oceano para resfriar seus servidores, eliminando a necessidade de sistemas de refrigeradores mecânicos convencionais, que consomem muita energia. Segundo a própria empresa, a redução nos custos de construção do estabelecimento foi de quase 40%, pois não foi necessário incluir refrigeradores no processo.</p><p>Em média, a construção dessas instalações custa em torno de 15 milhões de dólares para cada megawatt de capacidade. O uso de refrigeração gratuita reduziu os custos em 40%.</p><p>&nbsp;</p><p>A escolha do território, porém, não se trata apenas do clima mais frio, mas também do uso de energia sustentável.</p><p>Regiões como a Suécia e a Islândia geram mais energia per capita do que qualquer outra. Devido ao uso de fontes de energia hidrelétrica e geotérmica elas são capazes de produzir energia sustentável a longo prazo, com poucas pessoas utilizando-as no momento. Portanto, há uma grande capacidade de atender a demanda elétrica de novos data centers, possibilitando que novas empresas construam suas instalações nas proximidades.</p><p>A sustentabilidade acaba sendo um grande atrativo, pois permite que empresas melhorem sua reputação ambiental e economizem um dinheiro considerável. O uso de energia sustentável contribui para uma grande redução nos custos e na emissão de carbono na atmosfera, permitindo que as novas tecnologias sejam utilizadas em conjunto com o meio ambiente</p></p>',
             'status'=> PostStatus::PUBLICADO,
             'author_id'=>$user8->id
         ]);
 
         $photo1 = PostPhoto::create([
-            'file_name'=>"data_center_facebook.jpeg.png",
-            'file_path'=>"/data_center_facebook.172921706716-.jpeg",
+            'file_name'=>"infografico datacenter.jpeg",
+            'file_path'=>"/infografico-datacenter.173042530110-.jpeg",
             'file_extension'=>"jpeg",
             'mime_type'=>"image/jpeg",
-            'file_size'=>180197,
+            'file_size'=>208392,
             'post_id'=>$post1->id,
         ]);
+        // $photo1 = PostPhoto::create([
+        //     'file_name'=>"infografico datacenter.jpeg",
+        //     'file_path'=>"/data_center_facebook.172921706716-.jpeg",
+        //     'file_extension'=>"jpeg",
+        //     'mime_type'=>"image/jpeg",
+        //     'file_size'=>180197,
+        //     'post_id'=>$post1->id,
+        // ]);
         $post1->update(['thumbnail_id'=>$photo1->id]);
-
+        References::create([
+            "link" => "https://www.theregister.com/2016/05/12/power_in_a_cold_climate/",
+            "accessed_at" => "2025-10-18",
+            "reference" => "BRADBURY, D. Super cool: Arctic data centres aren’t just for Facebook. Disponível em: <https://www.theregister.com/2016/05/12/power_in_a_cold_climate>. Acesso em: 18 de out. de 2024.",
+            "post_id" => $post1->id,
+        ]);
+        
+        References::create([
+            "link" => "https://www.datacenterdynamics.com/en/news/solar-energy-could-power-data-centers-in-cold-climates-study/",
+            "accessed_at" => "2025-10-18",
+            "reference" => "Solar energy could power data centers in cold climates - study. Disponível em: <https://www.datacenterdynamics.com/en/news/solar-energy-could-power-data-centers-in-cold-climates-study/>. Acesso em: 18 de out. de 2024.",
+            "post_id" => $post1->id,
+        ]);
+        
+        References::create([
+            "link" => "https://netrality.com/data-centers/making-data-centers-cool/",
+            "accessed_at" => "2025-10-18",
+            "reference" => "MLEE. Making Data Centers Cool. Disponível em: <https://netrality.com/data-centers/making-data-centers-cool/>. Acesso em: 18 de out. de 2024.",
+            "post_id" => $post1->id,
+        ]);
+        
+        References::create([
+            "link" => "https://megawhat.energy/mercado-energetico/consumo/temperaturas-mais-altas-data-centers-e-precos-negativos-o-futuro-do-consumo-global-de-energia/",
+            "accessed_at" => "2025-10-18",
+            "reference" => "SOUTO, P. Temperaturas mais altas, data centers e preços negativos: o futuro do consumo global de energia - MegaWhat. Disponível em: <https://megawhat.energy/mercado-energetico/consumo/temperaturas-mais-altas-data-centers-e-precos-negativos-o-futuro-do-consumo-global-de-energia>. Acesso em: 118 de out. de 2024.",
+            "post_id" => $post1->id,
+        ]);
+        
         $post2 = Post::create([
             'title'=>'TI Verde - Boas Práticas',
             'subtitle'=>'Soluções Sustentáveis em TI: Reduzindo Impactos Ambientais com Práticas Verdes',
@@ -160,26 +197,144 @@ class DatabaseSeeder extends Seeder
             'post_id'=>$post2->id,
         ]);
         $post2->update(['thumbnail_id'=>$photo2->id]);
+        References::create([
+            "link"=>"https://circularbrain.io/descomplicando-a-logistica-reversa-de-eletroeletronicos",
+            "accessed_at"=>"2024-10-31",
+            "reference"=>"Circular Brain. ([s.d.]). Descomplicando a Logística Reversa de Eletroeletrônicos. Circularbrain.io. Recuperado 29 de novembro de 2024, de https://circularbrain.io/descomplicando-a-logistica-reversa-de-eletroeletronicos/",
+            "post_id"=>$post2->id,
+        ]);
+        References::create([
+            "link"=>"https://greeneletron.org.br/blog/green-eletron-reciclou-mais-de-514-toneladas-de-lixo-eletronico-em-2019-confira-outras-conquistas/",
+            "accessed_at"=>"2024-10-31",
+            "reference"=>"Eletron, G. (2019, dezembro 19). Green Eletron reciclou mais de 514 toneladas de lixo eletrônico em 2019. Confira outras conquistas! -. Org.br. https://greeneletron.org.br/blog/green-eletron-reciclou-mais-de-514-toneladas-de-lixo-eletronico-em-2019-confira-outras-conquistas/",
+            "post_id"=>$post2->id,
+        ]);
 
         $post3 = Post::create([
-            'title'=>'',
-            'subtitle'=>'',
-            'slug'=>sanitize_string(''),
-            'content'=> '',
+            'title'=>'Logística Reversa: Responsabilidade Ambiental e Descarte Correto de Resíduos',
+            'subtitle'=>'Entenda como o gerenciamento de resíduos eletrônicos, hospitalares e outros materiais de risco contribui para a sustentabilidade e a saúde pública, e conheça os locais e métodos para o descarte adequado',
+            'slug'=>sanitize_string('logística reversa'),
+            'content'=> '<p>A logística reversa é um instrumento que se da por um conjunto de ações, visando garantir um reinserção do resíduo na cadeia produtiva e/ou dar um destinação correta para esse lixo. Pode-se citar como exemplo o lixo eletrônico que caso não haja a destinação correta, pode gerar contaminação do solo e água, incêndios e outros danos a saúde pública. No Brasil é tratada pela lei de número 12.305 de 2010, a qual deixa o manejo adequado desse tipo de resíduo com as empresas que os produzem.</p><ul><li>-Resíduos que se enquadram: Lixos hospitalares, remédios e suas embalagens, aparelhos eletrônicos e eletrodomésticos, lâmpadas, pilhas e baterias, produtos automotivos (óleos, lubrificantes, baterias, pneus), embalagens de aço e alumínio, e insumos agrícolas;</li><li>-Locais para Descarte: Esse tipo de lixo, são considerados classificados como um alto risco a saúde e com grande impacto ambiental, então necessitam de um descarte correto que pode ser feito nos Ecopontos de cada cidade, nas devolutiva para as empresas, lojas e assistências técnicas, ou em outros postos de coleta especializada.</li><li>-Benefícios: Garante uma destinação correta para esse lixo, evitando maiores danos ambientais. Responsabiliza todos (setor publico/privado, consumidores) na hora do descarte correto. Aumenta a reutilização de materiais.<br>&nbsp;</li></ul>',
             'status'=> PostStatus::PUBLICADO,
             'author_id'=>$user3->id
         ]);
 
         $photo3 = PostPhoto::create([
-            'file_name'=>"data_center_facebook.jpeg.png",
-            'file_path'=>"/data_center_facebook.172921706716-.jpeg",
-            'file_extension'=>"jpeg",
-            'mime_type'=>"image/jpeg",
-            'file_size'=>180197,
+            'file_name'=>"infográfico - Logística Reversa.png",
+            'file_path'=>"/infográfico---logística-reversa.173042497719-.png",
+            'file_extension'=>"png",
+            'mime_type'=>"image/png",
+            'file_size'=>378545,
             'post_id'=>$post3->id,
         ]);
         $post3->update(['thumbnail_id'=>$photo3->id]);
+        References::create([
+            "link"=>"https://www.gov.br/mma/pt-br/assuntos/qualidade-ambiental-e-meio-ambiente-urbano/logistica-reversa#:~:text=A%20Logística%20Reversa%20é%20um,ciclos%20produtivos%2C%20ou%20outra%20destinação",
+            "accessed_at"=>"2024-10-29",
+            "reference"=>"-MMA, Inistério Do Meio Ambiente E Mudança Do Clima. Logística Reversa. gov.br, 2024. Disponível em: https://www.gov.br/mma/pt-br/assuntos/qualidade-ambiental-e-meio-ambiente-urbano/logistica-reversa#:~:text=A%20Logística%20Reversa%20é%20um,ciclos%20produtivos%2C%20ou%20outra%20destinação. Acesso em: 29 out. 2024. ",
+            "post_id"=>$post3->id,
+        ]);
+        References::create([
+            "link"=>"https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa",
+            "accessed_at"=>"2024-10-29",
+            "reference"=>"-SNIR+, Sistema Nacional De Informações Sobre A Gestão Dos Resíduos Sólidos . O que é Logística Reversa. Ministério do Meio Ambiente, 2024. Disponível em: https://sinir.gov.br/perfis/logistica-reversa/logistica-reversa/. Acesso em: 29 out. 2024. ",
+            "post_id"=>$post3->id,
+        ]);
+
+
+        $post4 = Post::create([
+            'title'=>'O que é cloud computing?',
+            'subtitle'=>'Computação em nuvem: benefícios, exemplos e impacto ambiental',
+            'slug'=>sanitize_string('O que e cloud computing'),
+            'content'=> '<h2><strong>O que é cloud computing?</strong></h2><p>É o fornecimento de serviços de computação, como servidores, armazenamento, banco de dados, rede, software, pela internet ("a nuvem"). Isso permite que empresas e indivíduos acessem e utilizem recursos tecnológicos sob demanda, sem a necessidade de investir em uma infraestrutura física própria.</p><p>&nbsp;</p><p>Quais são as principais vantagens?</p><ul><li>&nbsp;-Redução de custos: Elimina a necessidade de investimentos significativos em hardware e software, permitindo que os usuários paguem apenas pelos recursos que utilizam.</li><li>-Escalabilidade e flexibilidade: Permite ajustar rapidamente a capacidade de armazenamento e processamento conforme a demanda, sem a necessidade de adquirir ou instalar novos equipamentos.</li><li>-Atualizações automáticas: Os provedores de serviços em nuvem frequentemente atualizam seus sistemas, garantindo que os usuários tenham acesso às versões mais recentes sem esforço adicional.</li><li>-Eficiência Energética: A migração para a nuvem reduz a necessidade de manter servidores físicos locais, diminuindo o consumo de energia e, consequentemente, a pegada de carbono das empresas. Estudos indicam que a computação em nuvem pode reduzir o consumo de energia e a pegada de carbono em até 90%.</li></ul><p>&nbsp;</p><p>Alguns exemplos:</p><p>Google Cloud: O Google Cloud é alimentado por 100% de energia renovável, reduzindo a pegada de carbono dos serviços que utiliza. A infraestrutura do Google Cloud é projetada para otimizar o uso de energia e oferecer eficiência, contribuindo para práticas de TI Verde.</p><p>Amazon Web Services (AWS): A AWS tem iniciativas para reduzir a emissão de carbono em seus data centers, como o uso de energias renováveis e o investimento em projetos sustentáveis. Além disso, ao centralizar os recursos em nuvem, a AWS ajuda as empresas a reduzir o consumo de energia que teriam com servidores locais.</p><p>Microsoft Azure: A Microsoft tem metas ambiciosas de neutralidade em carbono e sustentabilidade. Seu serviço de nuvem, Azure, é alimentado por energias renováveis e busca melhorar a eficiência energética, reduzindo o impacto ambiental das operações.</p><p>Salesforce: A Salesforce implementa práticas de TI Verde ao utilizar a infraestrutura de nuvem de maneira eficiente, minimizando o consumo de energia de seus data centers. Eles também monitoram e relatam suas emissões de carbono para transparência e melhorias contínuas.</p><p>IBM Cloud: A IBM investe em tecnologia sustentável, com data centers que são otimizados para eficiência energética. Seus esforços incluem o uso de inteligência artificial para prever demandas e otimizar o uso de energia, reduzindo o impacto ambiental de sua operação em nuvem.&nbsp;<br>&nbsp;</p>',
+            'status'=> PostStatus::PUBLICADO,
+            'author_id'=>$user5->id
+        ]);
+
+        $photo4 = PostPhoto::create([
+            'file_name'=>"cloud_computing.jpg",
+            'file_path'=>"/cloud_computing.173042473052-.jpg",
+            'file_extension'=>"jpeg",
+            'mime_type'=>"image/jpeg",
+            'file_size'=>178580,
+            'post_id'=>$post4->id,
+        ]);
+        $post4->update(['thumbnail_id'=>$photo4->id]);
+        References::create([
+            "link"=>"https://www.iberdrola.com/sustentabilidade/que-e-lixo-eletronico",
+            "accessed_at"=>"2024-10-29",
+            "reference"=>"A poluição tecnológica, um problema do século XXI. Disponível em: <https://www.iberdrola.com/sustentabilidade/que-e-lixo-eletronico>. Acesso em: 1 nov. 2024.",
+            "post_id"=>$post4->id,
+        ]);
+        References::create([
+            "link"=>"https://circularbrain.io/descomplicando-a-logistica-reversa-de-eletroeletronicos",
+            "accessed_at"=>"2024-11-01",
+            "reference"=>"CIRCULAR BRAIN. Descomplicando a Logística Reversa de Eletroeletrônicos. Disponível em: <https://circularbrain.io/descomplicando-a-logistica-reversa-de-eletroeletronicos/>. Acesso em: 1 nov. 2024.",
+            "post_id"=>$post4->id,
+        ]);
+        References::create([
+            "link"=>"https://greeneletron.org.br/blog/green-eletron-reciclou-mais-de-514-toneladas-de-lixo-eletronico-em-2019-confira-outras-conquistas",
+            "accessed_at"=>"2024-11-01",
+            "reference"=>"ELETRON, G. Green Eletron reciclou mais de 514 toneladas de lixo eletrônico em 2019. Confira outras conquistas! -. Disponível em: <https://greeneletron.org.br/blog/green-eletron-reciclou-mais-de-514-toneladas-de-lixo-eletronico-em-2019-confira-outras-conquistas/>. Acesso em: 1 nov. 2024.",
+            "post_id"=>$post4->id,
+        ]);
+
+        
+        $post5 = Post::create([
+            'title'=>'GreenIT vs TI Tradicional',
+            'subtitle'=>'Um comparativo ilustrado',
+            'slug'=>sanitize_string('GreenIT vs TI Tradicional'),
+            'content'=> '<p>O infográfico acima ressalta as qualidades da GreenIT em relação ao modelo tradicional de Tecnologia da Informação. Com a análise demonstrada, pode ser observado diversos benefícios em seguir a TIVerde, desde financeiros até ambientais. Algo também não mencionado no infográfico seria a imagem da empresa que adota a metodologia do GreenIT, visto que investidores, stackholders e consumidores estão cada vez mais atentos a práticas sustentáveis dessas empresas de tecnologia.<br><a href="https://conteudo.movidesk.com/o-que-e-green-it/#:~:text=Uma%20das%20premissas%20do%20Green,atmosfera%20e%20poluem%20as%20cidades">https://conteudo.movidesk.com/o-que-e-green-it/#:~:text=Uma%20das%20premissas%20do%20Green,atmosfera%20e%20poluem%20as%20cidades</a></p><p><br></p><p>&nbsp;</p>',
+            'status'=> PostStatus::PUBLICADO,
+            'author_id'=>$user3->id
+        ]);
+
+        $photo5 = PostPhoto::create([
+            'file_name'=>"infografico2.png",
+            'file_path'=>"/infografico2.173042503664-.png",
+            'file_extension'=>"png",
+            'mime_type'=>"image/jpeg",
+            'file_size'=>204786,
+            'post_id'=>$post5->id,
+        ]);
+        References::create([
+            "link"=>"https://www.grupomytec.com.br/blog/green-it-entenda-importancia-da-tecnologia-sustentavel",
+            "accessed_at"=>"2024-10-30",
+            "reference"=>"GRUPO MYTEC. Green IT: entenda a importância da tecnologia sustentável. Disponível em: https://www.grupomytec.com.br/blog/green-it-entenda-importancia-da-tecnologia-sustentavel. Acesso em: 31 out. 2024.",
+            "post_id"=>$post5->id,
+        ]);
+        References::create([
+            "link"=>"https://conteudo.movidesk.com/o-que-e-green-it/#:~:text=Uma%20das%20premissas%20do%20Green,atmosfera%20e%20poluem%20as%20cidades",
+            "accessed_at"=>"2024-10-30",
+            "reference"=>"MOVIDESK. Green IT: o que é, como aplicar e exemplos de boas práticas. Disponível em: https://conteudo.movidesk.com/o-que-e-green-it/. Acesso em: 31 out. 2024.",
+            "post_id"=>$post5->id,
+        ]);
+        $post5->update(['thumbnail_id'=>$photo5->id]);
  
+        $post6 = Post::create([
+            'title'=>'GreenIT na sua Empresa',
+            'subtitle'=>'Aplicando a GreenIT na sua empresa',
+            'slug'=>sanitize_string('greenit-na-sua-empresa'),
+            'content'=>'<p>Pensando nas boas práticas do GreenIT, foi feito uma pesquisa sobre a implementação dela no meio empresarial, prezando a sustentabilidade e a eficiência operacional. Tendo o alinhamento das evoluções tecnológicas com a responsabilidade ambiental, as empresas conseguem reduzir o uso de carbono e com isso obter diversos benefícios com os tópicos ditos no infográfico.</p>',
+            'status'=> PostStatus::PUBLICADO,
+            'author_id'=>$user7->id
+        ]);
+
+        $photo6 = PostPhoto::create([
+            'file_name'=>"infografico pedro e shimizu.png",
+            'file_path'=>"/infografico-pedro-e-shimizu.173042598564-.png",
+            'file_extension'=>"png",
+            'mime_type'=>"image/jpeg",
+            'file_size'=>272163,
+            'post_id'=>$post6->id,
+        ]);
+        References::create([
+            "link"=>"https://tiflux.com/blog/ti-verde/",
+            "accessed_at"=>"2024-10-31",
+            "reference"=>"TIFLUX. TI verde: o que é, exemplos, benefícios e como implementar. Disponível em: https://tiflux.com/blog/ti-verde/. Acesso em: 31 out. 2024.",
+            "post_id"=>$post6->id,
+        ]);
+        $post6->update(['thumbnail_id'=>$photo6->id]);
  
         // $post1 = Post::create([
         //     'title'=>'Reducao do consumo de energia em data center',

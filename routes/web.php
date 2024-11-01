@@ -25,12 +25,10 @@ Route::get('/blog', [SiteController::class, 'blog'])->name('blog');
 Route::get('/contato', [SiteController::class, 'contact'])->name('contact');
 Route::post('/contato/store', [SiteController::class, 'contactStore'])->name('contact.store');
 
-
-
 Route::get('/ecomap',[CollectionPointController::class, 'index'])->name('ecomap.index');
 Route::get('/api/ecomap',[CollectionPointController::class, 'list_ecomaps'])->name('ecomap.list');
 
-Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
+Route::get('/blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
 
 Route::get('author/{author}', [SiteController::class, 'author'])->name('author.show');
 Route::post("/blog/post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
