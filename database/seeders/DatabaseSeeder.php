@@ -180,7 +180,7 @@ class DatabaseSeeder extends Seeder
         ]);
         
         $post2 = Post::create([
-            'title'=>'TI Verde - Boas Práticas',
+            'title'=>'TI Verde e suas tendências',
             'subtitle'=>'Soluções Sustentáveis em TI: Reduzindo Impactos Ambientais com Práticas Verdes',
             'slug'=>sanitize_string('Soluções Sustentáveis em TI: Reduzindo Impactos Ambientais com Práticas Verdes'),
             'content'=> '<p>Conjunto de práticas que tentam deixar o uso dos recursos da computação de maneira limpa e sustentável para o meio ambiente. Essas práticas consistem em maneiras ou métodos<br>para a redução da emissão de CO2, menos gasto de energia ou otimização do uso.</p><br><h2><strong>INFOGRÁFICO</strong></h2><ul><li>- O infográfico acima cita 5 maneiras que o TI verde pode ser desenvolvido. Sendo elas:</li><li>- A computação em nuvem, vem com a premissa de reduzir o uso de HDs e trabalhos presenciais na empresa, e por consequência diminuiria a quantidade de material gasto para a sua elaboração, energia e emissão de carbono com os processos.</li><li>- A melhor refrigeração dos Data Centers, que resultaria em um menor uso de energia, visto que a maior da energia gasta écom ar condicionado para manter a temperatura estável.</li><li>- A não utilização de materiais tóxicos durante a produção, tendo em vista o grande uso de metais e substâncias químicas, que podem ter o descarte de maneira incorreta, assim gerando impactos ambientais gravíssimos.</li><li>A evolução tecnológica com baixo impacto, a qual tem como o maior objetivo gerenciar a cadeia de produção nas indústrias, desde a extração da matéria prima até a entrega do produto final, prevendo que a emissão de gases do efeito estufa seja menor.</li><li>- A logística inversa, que tem o intuito de recuperar o lixo eletrônico e/ou não biodegradável, como o plástico, gerado pelos produtos, com isso, o descarte e a reciclagem podem ser feita de maneira correta, e diminuindo ainda mais a poluição.</li></ul>',
@@ -189,11 +189,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $photo2 = PostPhoto::create([
-            'file_name'=>"infografico ecobyte.jpeg",
-            'file_path'=>"/infografico-ecobyte.172921531957-.jpeg",
-            'file_extension'=>"jpeg",
-            'mime_type'=>"image/jpeg",
-            'file_size'=>203598,
+            'file_name'=>"infografico ti-verde.png",
+            'file_path'=>"/infografico-ti-verde.173046052918-.png",
+            'file_extension'=>"png",
+            'mime_type'=>"image/png",
+            'file_size'=>1230322,
             'post_id'=>$post2->id,
         ]);
         $post2->update(['thumbnail_id'=>$photo2->id]);
