@@ -21,17 +21,22 @@ Route::get('/dashboard', function () {
 
 Route::get('/sobre', [SiteController::class, 'about'])->name('about');
 Route::get('/blog', [SiteController::class, 'blog'])->name('blog');
-Route::get('/contato', function(){})->name('contact');
+
+Route::get('/contato', [SiteController::class, 'contact'])->name('contact');
+Route::post('/contato/store', [SiteController::class, 'contactStore'])->name('contact.store');
 
 Route::get('/ecomap',[CollectionPointController::class, 'index'])->name('ecomap.index');
 Route::get('/api/ecomap',[CollectionPointController::class, 'list_ecomaps'])->name('ecomap.list');
 
-Route::get('blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
+Route::get('/blog/{post}', [PostController::class, 'viewPost'])->name('post.viewPost');
 
 Route::get('author/{author}', [SiteController::class, 'author'])->name('author.show');
 Route::post("/blog/post/{post}/comment", [CommentController::class, 'store'])->name('post.comment.store');
+Route::get('/api/blog/create/webscraping', [PostController::class, 'webscraping'])->name('api.blog.webscraping');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/admin/contato', [SiteController::class, 'contactIndex'])->name('contact.index');
+    Route::get('/admin/contato/{id}', [SiteController::class, 'contactShow'])->name('contact.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -42,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/import-collection-points', [CollectionPointController::class, 'import_page'])->name('ecomap.import_page');
     Route::post('/admin/import-collection-points', [CollectionPointController::class, 'import'])->name('ecomap.import');
+
 });
 
 

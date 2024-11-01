@@ -19,6 +19,16 @@
                 <div class="my-4">
                     {!! $post->content !!}
                 </div>
+                @if(count($references) != 0)
+                    <div class="my-4">
+                        <h2><strong>Referencias</strong></h2>
+                        <ul>
+                            @foreach ($references as $reference)
+                                <li class="my-2">{!! $reference->reference !!}</li>                            
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
         </article>
 
@@ -126,7 +136,7 @@
         <div class="w-full bg-white shadow flex flex-col my-4 p-6">
             <p class="text-xl font-semibold pb-5">Sobre Nós</p>
             <p class="pb-2">Bem-vindo ao EcoByte! Fundado em 2024, o EcoByte surgiu da necessidade de promover um setor de tecnologia mais sustentável e consciente.</p>
-            <a href="#" class="w-full bg-green-800 text-white font-bold text-sm uppercase rounded hover:bg-green-700 flex items-center justify-center px-2 py-3 mt-4">
+            <a href="{{ route('about') }}" class="w-full bg-green-800 text-white font-bold text-sm uppercase rounded hover:bg-green-700 flex items-center justify-center px-2 py-3 mt-4">
                 Saiba mais
             </a>
         </div>

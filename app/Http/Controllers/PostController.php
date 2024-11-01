@@ -8,6 +8,11 @@ use App\Http\Requests\Post\StorePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\PostPhoto;
+use App\Models\References;
+use Carbon\Carbon;
+use DateTime;
+use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +21,8 @@ class PostController extends Controller
     public function __construct(
         protected Post $post,
         protected Comment $comments,
-        protected PostPhoto $photo
+        protected PostPhoto $photo,
+        protected References $references
     ) {}
 
     public static string $image_repository = '/app/public/thumbnails';
@@ -166,7 +172,6 @@ class PostController extends Controller
         if (!$post) {
             return redirect()->back()->withErrors(['slug'=> 'Este post não existe.'])->withInput();
         }
-
         $previous = $this->post
             ->where('id', '<', $post->id)
             ->where('status', PostStatus::PUBLICADO->name)
@@ -189,12 +194,15 @@ class PostController extends Controller
                         ->where('status', PostStatus::PUBLICADO->name)
                         ->orderBy('created_at', 'desc')
                         ->take(10)->get();
-    
+        
+        $references = $this->references->where('post_id', $post->id)->get();
+                        
         return view('guest.viewPost', [
             'post' => $post,
             'comments' => $comments,
             'previous' => $previous,
             'next' => $next,
+            'references'=>$references,
             'viewMore'=>$viewMore
         ]);
     }
@@ -225,5 +233,90 @@ class PostController extends Controller
         }
         return null;
     }
-   
+    public function webscraping(Request $request) {
+        $url = $request->input('url');
+        if(!$url) {
+            return response()->json("Informacoes invalidas", 422);
+        }
+        $accessed_at = $request->input('accessed_at');
+        if(!$accessed_at) {
+            return response()->json("Informacoes invalidas", 422);
+        }
+        try {
+            $accessed_at = Carbon::parse($accessed_at)->translatedFormat('d \d\e M. \d\e Y');
+        } catch (Exception $e) {
+            return response()->json("Informacoes invalidas", 422);
+        }
+
+        $client = new Client();
+        $response = $client->get($url);
+
+        $html = (string) $response->getBody();
+
+        $metadados = [];
+
+        // Inicializa o DOMDocument e suprime erros
+        $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($html);
+        libxml_clear_errors();
+
+        // Extrai o título
+        $tituloTags = $dom->getElementsByTagName('title');
+        if ($tituloTags->length > 0) {
+            $metadados['title'] = $tituloTags->item(0)->nodeValue;
+        }
+        $metaTags = $dom->getElementsByTagName('meta');
+        foreach ($metaTags as $meta) {
+            $nome = $meta->getAttribute('name');
+            $propriedade = $meta->getAttribute('property');
+            $conteudo = $meta->getAttribute('content');
+
+            if (!empty($nome)) {
+                    $metadados[$nome] = $conteudo;
+            } elseif (!empty($propriedade)) {
+                    $metadados[$propriedade] = $conteudo;
+            }
+        }
+
+        $title = $metadados['title'] ?? $metadados['og:title'] ?? $metadados['twitter:title'] ?? "TITULO-INVALIDO";
+        $author = $metadados['author'] ?? "AUTOR-INVALIDO";
+        if($author != "AUTOR-INVALIDO") {
+            $author = $this->formatAbntName($author);
+        }
+        $published_at = $metadados['article:published_time'] ?? "DATA-INVALIDA";
+        if ($published_at !== "DATA-INVALIDA") {
+            try {
+                $date = new DateTime($published_at);
+                $year = $date->format('Y');
+            } catch (Exception $e) {
+                $year = "DATA-INVALIDA";
+            }
+        } else {
+            $year = "DATA-INVALIDA";
+        }
+        $site = $metadados['og:site_name'] ?? $metadados['application-name'] ?? "SITE-INVALIDO";
+
+        $formatted = "<strong>".$author."</strong>. ".$title.". <strong>".$site."</strong>, ".$year.". Disponível em: ".$url.". Acesso em: ".$accessed_at;
+
+        return response()->json(['reference'=>$formatted], 201);
+    }
+
+    private function formatAbntName($name) {
+        $nameParts = explode(' ', $name);
+
+        $firstName = array_shift($nameParts);
+
+        $lastName = strtoupper(array_pop($nameParts));
+        $initials = '';
+
+        foreach ($nameParts as $part) {
+            $initials .= strtoupper(substr($part, 0, 1)) . '. ';
+        }
+
+        $initials = trim($initials);
+
+        return "{$lastName}, {$firstName} {$initials}";
+    }
+
 }

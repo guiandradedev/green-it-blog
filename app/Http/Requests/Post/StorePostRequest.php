@@ -29,7 +29,11 @@ class StorePostRequest extends FormRequest
             'content' => 'required|string',
             'slug' => 'required|max:255|string',
             'status'=>['in:' . implode(',', PostStatus::array())],
-            'thumbnail'=>'required|image|mimes:png,jpg,jpeg'
+            'thumbnail'=>'required|image|mimes:png,jpg,jpeg',
+            // 'reference' => 'required|array',
+            // 'reference.*.link' => 'required|string',
+            // 'reference.*.accessed_at' => 'required|string',
+            // 'reference.*.content' => 'required|string',
         ];
     }
 }

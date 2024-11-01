@@ -64,7 +64,7 @@
     <aside class="w-full md:w-1/3 flex flex-col items-center px-3">
         <div class="w-full bg-white shadow flex flex-col my-4 p-6">
             <p class="text-xl font-semibold pb-5">About Us</p>
-            <p class="pb-2">Bem-vindo ao Green IT! Fundado em 2023, o Green IT surgiu da necessidade de promover um setor de tecnologia mais sustentável e consciente.</p>
+            <p class="pb-2">Bem-vindo ao Green IT! Fundado em 2024, o Green IT surgiu da necessidade de promover um setor de tecnologia mais sustentável e consciente.</p>
             <a href="#" class="w-full bg-green-800 text-white font-bold text-sm uppercase rounded hover:bg-green-700 flex items-center justify-center px-2 py-3 mt-4">
                 Saiba Mais
             </a>

@@ -14,6 +14,9 @@ class Post extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+    public function references(){
+        return $this->hasMany(References::class);
+    }
 
     public function thumbnail()
     {

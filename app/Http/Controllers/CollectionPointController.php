@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\CollectionPointsImport;
 use App\Models\CollectionPoint;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Validators\ValidationException;
@@ -11,11 +12,13 @@ use Maatwebsite\Excel\Validators\ValidationException;
 class CollectionPointController extends Controller
 {
     public function __construct(
-        protected CollectionPoint $collection
+        protected CollectionPoint $collection,
+        protected Post $post
     ) {}
     
     public function index() {
-        return view('ecomaps.index');
+        $post = $this->post->where('slug', sanitize_string('Soluções Sustentáveis em TI: Reduzindo Impactos Ambientais com Práticas Verdes'))->first();
+        return view('ecomaps.index', ['post'=>$post]);
     }
 
     public function list_ecomaps() {
