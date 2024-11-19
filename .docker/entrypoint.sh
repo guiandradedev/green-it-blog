@@ -21,3 +21,6 @@ nginx
 
 # Iniciar o PHP-FPM
 php-fpm
+
+# Realiza o build do NPM
+npm run build

@@ -8,6 +8,9 @@ RUN apt update && \
     libcurl4-openssl-dev pkg-config libssl-dev $PHPIZE_DEPS && \
     mkdir -p /etc/apt/keyrings
 
+RUN curl -fsSL https://deb.nodesource.com/setup_$%7BNODE_VERSION%7D.x | bash - && \
+    apt install -y nodejs
+
 RUN docker-php-ext-install opcache pcntl pdo_mysql zip gd sockets bcmath
 RUN pecl update-channels && \
     pecl install ds igbinary xdebug && \
