@@ -19,7 +19,7 @@ php artisan storage:link # refazendo o symlink
 # Iniciar o Nginx
 nginx
 
-# Iniciar o PHP-FPM
+# Iniciar o PHP-FPM é 
 php-fpm
 
 # Realiza o build do NPM

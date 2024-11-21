@@ -62,10 +62,10 @@
                 <img src="{{ asset('images/LogoGreenIt.png') }}" class="w-48" class="block"> <!-- Removido style para centralizar -->
             </div>
             <div class="text-center"> <!-- Mantém o texto centralizado -->
-                <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
+                <a class="font-bold text-green-700 uppercase hover:text-green-800 text-5xl" href="#">
                     EcoByte
                 </a>
-                <p class="text-lg text-gray-600">
+                <p class="text-lg text-gray-800">
                     Compartilhando ideias sobre TI verde
                 </p>
             </div>
