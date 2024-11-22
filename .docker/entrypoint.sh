@@ -15,6 +15,7 @@ npm install
 php artisan optimize:clear
 find public -type l -delete # caso haja algum symlink será removido
 php artisan storage:link # refazendo o symlink
+php artisan migrate
 
 # Iniciar o Nginx
 nginx

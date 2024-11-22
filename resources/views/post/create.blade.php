@@ -73,7 +73,7 @@
                                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="reference-link-0">
                                                 Link do site
                                             </label>
-                                            <input required class="reference-link appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="reference-link-0" type="text" placeholder="http://link" name="reference[0][link]" value="{{old('reference-link-0')}}">
+                                            <input required class="reference-link appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="reference-link-0" type="text" placeholder="https://link" name="reference[0][link]" value="{{old('reference-link-0')}}">
                                         </div>
                                         <div class="mx-4">
                                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="reference-accessed_at-0">
