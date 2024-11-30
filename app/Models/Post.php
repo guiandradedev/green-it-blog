@@ -20,7 +20,7 @@ class Post extends Model
 
     public function thumbnail()
     {
-        return $this->hasOne(PostPhoto::class);
+        return $this->hasOne(PostPhoto::class)->latestOfMany();
     }
 
     public function author()

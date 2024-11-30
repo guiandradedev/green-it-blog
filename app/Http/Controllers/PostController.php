@@ -318,5 +318,34 @@ class PostController extends Controller
 
         return "{$lastName}, {$firstName} {$initials}";
     }
+    public function changeThumbnail(Request $request) {
+        $post = $this->post->where('slug', sanitize_string($request->post))->first();
+        if(!$post) {
+            return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
+        }
+        $this->authorize('update', [Post::class, $post]);
 
+        $request->validate([
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $photo = $request->thumbnail;
+        
+        if($upload = $this->upload_image(photo: $photo))  {
+            $thumbnail = $this->photo->create([
+                'file_name'=>$upload['file_name'],
+                'file_path'=>$upload['file_path'],
+                'file_extension'=>$upload['file_extension'],
+                'mime_type'=>$upload['mime_type'],
+                'file_size'=>$upload['file_size'],
+                'post_id'=>$post->id,
+            ]);
+            $post->update(['thumbnail_id' => $thumbnail->id]);
+            return redirect()->back()->with('success', 'Foto atualizada com sucesso!');
+        }
+        return redirect()->back()->withErrors(['photo'=>'Foto invalida']);
+    
+        // Retornar mensagem de sucesso
+    
+    }
 }

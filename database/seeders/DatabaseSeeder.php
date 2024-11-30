@@ -56,7 +56,8 @@ class DatabaseSeeder extends Seeder
         $user3 = User::create([
             'name' => 'Ximenes',
             'email' => 'ximenes@teste.com',
-            'about' => 'Texto sobre do Ximenes',
+            'about' => 'Sou estudante Universitário da PUC-Campinas e estou cursando Engenharia da Computação. Me interesso pela ampla área da computação em geral, como por exemplo programação de algoritmos, desenvolvimento web e sistemas digitais.
+Busco sempre aprender cada vez mais sobre as novas tecnologias e aprimorar minhas experiências como empreendedor.',
             'linkedin' => 'https://www.linkedin.com/in/guiximenes/',
             'github' => 'https://github.com/ximeninh0',
             'username' => 'ximenes',
@@ -68,7 +69,7 @@ class DatabaseSeeder extends Seeder
         $user4 = User::create([
             'name' => 'Luigi Shima',
             'email' => 'luigishi@teste.com',
-            'about' => 'Texto sobre do Luigi Shima',
+            'about' => 'Interessado pela ideia de um mundo mais sustentável, atualmente sou estudante de Engenharia de Computação pela PUC-Campinas. Acredito que com novas invenções tecnológicas e avanços na área de sustentabilidade, podemos viver em um mundo mais confortável. Me interesso pela área de segurança de dados e inteligência artificial, e acredito que podemos ser capazes de fazer descobertas e soluções inovadoras para a sociedade podendo mudar o rumo de como lidamos com tudo.',
             'linkedin' => '',
             'github' => 'https://github.com/luigishimabukuro',
             'username' => 'shima',
@@ -90,7 +91,7 @@ class DatabaseSeeder extends Seeder
         $user5->assignRole('dev');
 
         $user6 = User::create([
-            'name' => 'Pedro Désio',
+            'name' => 'Pedro Desio',
             'email' => 'pedro@teste.com',
             'about' => 'Texto sobre do Pedro',
             'linkedin' => '',
@@ -106,7 +107,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'bruno@teste.com',
             'about' => 'Texto sobre do Shimizu',
             'linkedin' => '',
-            'github' => '',
+            'github' => 'https://github.com/BrunoHenriqueShimizu',
             'username' => 'bruno',
             'avatar' => '/5462680.1728232796994-.png',
             'password'=>Hash::make('password')
@@ -116,7 +117,7 @@ class DatabaseSeeder extends Seeder
         $user8 = User::create([
             'name' => 'Rafael',
             'email' => 'rafa@teste.com',
-            'about' => 'Texto sobre do Rafael',
+            'about' => 'Estudante de Engenharia da Computação na PUC-Campinas, com experiência em desenvolvimento de jogos e um forte interesse em sistemas digitais e inteligência artificial. Busco constantemente me aprofundar em novas tecnologias, com o objetivo de criar soluções inovadoras e de impacto.',
             'linkedin' => 'https://www.linkedin.com/in/rafael-siscaro-826692333/',
             'github' => 'https://github.com/Rafa38gh',
             'username' => 'rafa',

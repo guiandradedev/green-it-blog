@@ -66,6 +66,26 @@
                             Postar
                         </button>
                     </form>
+
+                    <form action="{{ route('post.change_thumbnail', ['post'=>$post->slug]) }}" method="POST" enctype="multipart/form-data">
+                        @method('put')
+                        @csrf
+                        <div class="mb-4">
+                            <label for="photo" class="block font-medium text-sm text-gray-700">
+                                Foto Atual
+                            </label>
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/thumbnails'. $post->thumbnail->file_path) }}" alt="">
+                            </div>
+                            <input type="file" id="photo" name="thumbnail" accept="image/*" 
+                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+                                file:rounded-full file:border-0 file:text-sm file:font-semibold 
+                                file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        </div>
+                        <button type="submit" class="px-4 py-2 bg-blue-500 rounded">
+                            Alterar Foto
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

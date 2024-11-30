@@ -42,12 +42,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::resource("/admin/post", PostController::class);    
+    Route::put("/admin/post/{post}/change_thumbnail", [PostController::class, 'changeThumbnail'])->name('post.change_thumbnail');
     
     Route::delete("/admin/post/{post}/comment", [CommentController::class, 'delete'])->name('post.comment.delete');
 
     Route::get('/admin/import-collection-points', [CollectionPointController::class, 'import_page'])->name('ecomap.import_page');
     Route::post('/admin/import-collection-points', [CollectionPointController::class, 'import'])->name('ecomap.import');
 
+    Route::get('/admin/profile', [SiteController::class, 'editProfile'])->name('profile.edit');
+    Route::put('/admin/profile/change_photo', [SiteController::class, 'changePhoto'])->name('profile.change_photo');
+    Route::put('/admin/profile', [SiteController::class, 'updateProfile'])->name('profile.update');
 });
 
 
