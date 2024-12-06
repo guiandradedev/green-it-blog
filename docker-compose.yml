@@ -14,22 +14,22 @@ services:
         networks:
             - src_default
         depends_on:
-            - app-redis
+            # - app-redis
             - app-mysql  
-    app-redis:
-        container_name: app-redis
-        restart: unless-stopped
-        image: 'redis:alpine'
-        ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
-        volumes:
-            - '.docker/local/data/redis:/data'
-        networks:
-            - src_default
-        healthcheck:
-            test: [ "CMD", "redis-cli", "ping" ]
-            retries: 3
-            timeout: 5s
+    # app-redis:
+    #     container_name: app-redis
+    #     restart: unless-stopped
+    #     image: 'redis:alpine'
+    #     ports:
+    #         - '${FORWARD_REDIS_PORT:-6379}:6379'
+    #     volumes:
+    #         - '.docker/local/data/redis:/data'
+    #     networks:
+    #         - src_default
+    #     healthcheck:
+    #         test: [ "CMD", "redis-cli", "ping" ]
+    #         retries: 3
+    #         timeout: 5s
 
     app-mysql:
         container_name: app-mysql
