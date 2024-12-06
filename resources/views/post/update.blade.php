@@ -62,6 +62,66 @@
                             </div>
                         </div> --}}
 
+                        <div>
+                            <h2 class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                Referencias
+                            </h2>
+                            <div id="form-rows">
+                                @if(!$references)
+                                    <div class="w-full px-3 mb-6 md:mb-0 references" id="reference-base">
+                                        <div class="flex w-100">
+                                            <div>
+                                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="reference-link-0">
+                                                    Link do site
+                                                </label>
+                                                <input required class="reference-link appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="reference-link-0" type="text" placeholder="https://link" name="reference[0][link]" value="{{old('reference-link-0')}}">
+                                            </div>
+                                            <div class="mx-4">
+                                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="reference-accessed_at-0">
+                                                    Acessado as
+                                                </label>
+                                                <input required class="accessed_at appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="reference-accessed_at-0" type="date" name="reference[0][accessed_at]" value="{{old('reference-accessed_at-0')}}">
+                                            </div>
+                                            <div class="content-center">
+                                                <button id="generate-abnt-button-0" class="generate-abnt-button bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Gerar ABNT</button>
+                                                <button class=" mx-2 add-reference bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">+</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <textarea required ="reference[0][content]" id="reference-0" cols="30" rows="10" class="references"></textarea>
+                                        </div>
+                                    </div>
+                                    @else
+                                        @foreach ($references as $reference)
+                                            
+                                        <div class="w-full px-3 mb-6 md:mb-0 references" id="reference-base">
+                                            <div class="flex w-100">
+                                                <div>
+                                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="reference-link-0">
+                                                        Link do site
+                                                    </label>
+                                                    <input required class="reference-link appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="reference-link-0" type="text" placeholder="https://link" name="reference[0][link]" value="{{ $reference->link ?? old('reference-link-0')}}">
+                                                </div>
+                                                <div class="mx-4">
+                                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="reference-accessed_at-0">
+                                                        Acessado as
+                                                    </label>
+                                                    <input required class="accessed_at appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="reference-accessed_at-0" type="date" name="reference[0][accessed_at]" value="{{$reference->accessed_at ?? old('reference-accessed_at-0')}}">
+                                                </div>
+                                                <div class="content-center">
+                                                    <button id="generate-abnt-button-0" class="generate-abnt-button bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Gerar ABNT</button>
+                                                    <button class=" mx-2 add-reference bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">+</button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <textarea required ="reference[0][content]" id="reference-0" cols="30" rows="10" class="references">{{ $reference->reference }}</textarea>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                @endif
+                            </div>
+                        </div>
+
                         <button type="submit" class="bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                             Postar
                         </button>

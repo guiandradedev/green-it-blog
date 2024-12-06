@@ -117,8 +117,9 @@ class PostController extends Controller
             return redirect()->back()->withErrors(['slug'=> 'Este post nao existe.'])->withInput();
         }
         $this->authorize('update', [Post::class, $post]);
+        $references = $this->references->where('post_id', $post->id)->get();
 
-        return view('post.update', ['post'=>$post]);
+        return view('post.update', ['post'=>$post, 'references'=>$references]);
     }
 
     /**
